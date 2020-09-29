@@ -5,8 +5,7 @@
  */
 package SistemaLoja.model.pessoa_fisica;
 
-import SistemaLoja.database.pessoa_fisica.*;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -76,6 +75,5 @@ public class Cliente {
         this.setDataNascimento(dataNascimento);
         this.setEmail(email);
     }
-    
-    
+ 
 }
