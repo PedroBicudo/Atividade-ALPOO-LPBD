@@ -41,14 +41,9 @@ public interface IBancoDao {
     public boolean isClienteJaCriado(Cliente cliente);
     public boolean isTelefoneJaCriado(Telefone telefone);
     public boolean isBairroJaCriado(Bairro bairro);
-    public boolean isCidadeJaCriado(Cidade cidade);
-    public boolean isEstadoJaCriado(Estado estado);
     public boolean isResidenciaJaCriado(Residencia residencia);
     public boolean isRuaJaCriado(Rua rua);
     public boolean isDistribuidorJaCriado(Distribuidor distribuidor);
-    public boolean isItemVendaJaCriado(ItemVenda itemVenda);
-    public boolean isProdutoJaCriado(Produto produto);
-    public boolean isVendaJaCriado(Venda venda);
 
     // Atualizar dados
     public boolean atualizarCliente(Cliente cliente);
@@ -56,6 +51,16 @@ public interface IBancoDao {
     public boolean atualizarResidencia(Residencia residencia);
     public boolean atualizarRua(Rua rua);
     public boolean atualizarDistribuidor(Distribuidor distribuidor);
+    public boolean atualizarProduto(Produto produto);
+    public boolean efetuarCompraDeProduto(Cliente cliente, Produto produto);
+    
+    // Métodos da atiividade
+    public ArrayList<Cliente> selecionarClientesSemAColunaEmail();
+    public ArrayList<Produto> selecionarProdutosVencidos(); // Criar uma VIEW
+    public void mostrarVendasPorClienteEm2020();
+    public ArrayList<Venda> selecionarVendas();
+    
+    
     
     // Encerrar conexão
     public void endConnection();
