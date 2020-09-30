@@ -38,7 +38,6 @@ public interface IBancoDao {
     public boolean inserirVenda(Venda venda);
     
     // Verificar se dados existem
-    public boolean isClienteJaCriado(Cliente cliente);
     public boolean isTelefoneJaCriado(Telefone telefone);
     public boolean isBairroJaCriado(Bairro bairro);
     public boolean isResidenciaJaCriado(Residencia residencia);
