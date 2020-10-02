@@ -161,7 +161,7 @@ public class SQLServerDao implements IBancoDao {
             String sqlInsert = "INSERT INTO ITENS_VENDA(QUANTIDADE, SUB_TOTAL, IDFK_VENDA, IDFK_PRODUTO) VALUES(?, ?, ?, ?)";
             PreparedStatement prepareStatement = databaseConnection.prepareStatement(sqlInsert);
             prepareStatement.setInt(1, itemVenda.getTotal());
-            prepareStatement.setInt(2, itemVenda.getSubTotal());
+            prepareStatement.setFloat(2, itemVenda.getSubTotal());
             prepareStatement.setInt(3, itemVenda.getIdfkVenda());
             prepareStatement.setInt(4, itemVenda.getIdfkProduto());
             prepareStatement.executeUpdate();

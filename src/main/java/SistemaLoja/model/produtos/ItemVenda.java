@@ -14,7 +14,7 @@ public class ItemVenda {
     private int idfkVenda;
     private int idfkProduto;
     private int total;
-    private int subTotal;
+    private float subTotal;
 
     public int getIdItemVenda() {
         return idItemVenda;
@@ -48,15 +48,15 @@ public class ItemVenda {
         this.total = total;
     }
 
-    public int getSubTotal() {
+    public float getSubTotal() {
         return subTotal;
     }
 
-    public void setSubTotal(int subTotal) {
+    public void setSubTotal(float subTotal) {
         this.subTotal = subTotal;
     }
 
-    public ItemVenda(int idItemVenda, int idfkVenda, int idfkProduto, int total, int subTotal) {
+    public ItemVenda(int idItemVenda, int idfkVenda, int idfkProduto, int total, float subTotal) {
         this.setIdItemVenda(idItemVenda);
         this.setIdfkVenda(idfkVenda);
         this.setIdfkProduto(idfkProduto);
