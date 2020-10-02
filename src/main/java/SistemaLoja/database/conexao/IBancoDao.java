@@ -28,8 +28,6 @@ public interface IBancoDao {
     public boolean inserirCliente(Cliente cliente);
     public boolean inserirTelefone(Telefone telefone);
     public boolean inserirBairro(Bairro bairro);
-    public boolean inserirCidade(Cidade cidade);
-    public boolean inserirEstado(Estado estado);
     public boolean inserirResidencia(Residencia residencia);
     public boolean inserirRua(Rua rua);
     public boolean inserirDistribuidor(Distribuidor distribuidor);
@@ -37,13 +35,6 @@ public interface IBancoDao {
     public boolean inserirProduto(Produto produto);
     public boolean inserirVenda(Venda venda);
     
-    // Verificar se dados existem
-    public boolean isTelefoneJaCriado(Telefone telefone);
-    public boolean isBairroJaCriado(Bairro bairro);
-    public boolean isResidenciaJaCriado(Residencia residencia);
-    public boolean isRuaJaCriado(Rua rua);
-    public boolean isDistribuidorJaCriado(Distribuidor distribuidor);
-
     // Atualizar dados
     public boolean atualizarCliente(Cliente cliente);
     public boolean atualizarTelefone(Telefone telefone);
@@ -51,15 +42,25 @@ public interface IBancoDao {
     public boolean atualizarRua(Rua rua);
     public boolean atualizarDistribuidor(Distribuidor distribuidor);
     public boolean atualizarProduto(Produto produto);
-    public boolean efetuarCompraDeProduto(Cliente cliente, Produto produto);
     
-    // Métodos da atiividade
+    public boolean efetuarCompraDeProduto(Cliente cliente, Venda venda, Produto produto, int quantia);
+    
+    // Selecionar grupos de registros
+    public ArrayList<Estado> selecionarTodosOsEstados();
+    public ArrayList<Cidade> selecionarCidadesByEstado(int estadoId);
+    public ArrayList<Bairro> selecionarBairrosByCidade(int cidadeId);
+    public ArrayList<Bairro> selecionarRuasByBairro(int bairroId);
+    
+    // Selecionar um registro
+    public Residencia selecionarResidenciaById(int residenciaId);
+    public Produto selecionarProdutoById(int produtoId);
+    
+    // Métodos da atividade
     public ArrayList<Cliente> selecionarClientesSemAColunaEmail();
     public ArrayList<Produto> selecionarProdutosVencidos(); // Criar uma VIEW
     public void mostrarVendasPorClienteEm2020();
     public ArrayList<Venda> selecionarVendas();
-    
-    
+    public float getValorEmDinheiroDoTotalDeVendas();
     
     // Encerrar conexão
     public void endConnection();
