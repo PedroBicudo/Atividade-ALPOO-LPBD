@@ -444,8 +444,14 @@ public class SQLServerDao implements IBancoDao {
         return produtoEncontrado;
     }
     
-    @Override
-    public boolean efetuarCompraDeProduto(Cliente cliente, Venda venda, Produto produto, int quantia) {
+//    @Override
+    public boolean efetuarCompraDeProduto(Venda venda, Produto produto, int quantia) {
+        // Achar 
+        float subTotal = ((float) quantia) * produto.getPrecoVenda();
+        ItemVenda grupoDeProdutoVendidos = new ItemVenda(venda.getIdVenda(), produto.getIdProduto(), quantia, subTotal);
+        inserirItemVenda(grupoDeProdutoVendidos);            
+            
+            
         return true;
     }
 
