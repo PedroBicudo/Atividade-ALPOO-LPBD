@@ -23,5 +23,4 @@ public interface AtualizarDados {
     public boolean atualizarRua(Rua rua);
     public boolean atualizarDistribuidor(Distribuidor distribuidor);
     public boolean atualizarProduto(Produto produto);
-    public boolean atualizarEstoqueDoProduto(Produto produto, int quantiaCompradaDoEstoque);
 }
