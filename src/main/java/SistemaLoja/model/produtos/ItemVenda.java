@@ -10,19 +10,10 @@ package SistemaLoja.model.produtos;
  * @author pedroh
  */
 public class ItemVenda {
-    private int idItemVenda;
     private int idfkVenda;
     private int idfkProduto;
     private int total;
-    private int subTotal;
-
-    public int getIdItemVenda() {
-        return idItemVenda;
-    }
-
-    public void setIdItemVenda(int idItemVenda) {
-        this.idItemVenda = idItemVenda;
-    }
+    private float subTotal;
 
     public int getIdfkVenda() {
         return idfkVenda;
@@ -48,16 +39,15 @@ public class ItemVenda {
         this.total = total;
     }
 
-    public int getSubTotal() {
+    public float getSubTotal() {
         return subTotal;
     }
 
-    public void setSubTotal(int subTotal) {
+    public void setSubTotal(float subTotal) {
         this.subTotal = subTotal;
     }
 
-    public ItemVenda(int idItemVenda, int idfkVenda, int idfkProduto, int total, int subTotal) {
-        this.setIdItemVenda(idItemVenda);
+    public ItemVenda(int idfkVenda, int idfkProduto, int total, float subTotal) {
         this.setIdfkVenda(idfkVenda);
         this.setIdfkProduto(idfkProduto);
         this.setTotal(total);
