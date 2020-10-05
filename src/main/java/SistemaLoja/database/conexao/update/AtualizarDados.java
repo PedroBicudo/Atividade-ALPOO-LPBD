@@ -5,7 +5,8 @@
  */
 package SistemaLoja.database.conexao.update;
 
-import SistemaLoja.model.contato.Telefone;
+import SistemaLoja.model.contato.TelefoneCliente;
+import SistemaLoja.model.contato.TelefoneDistribuidor;
 import SistemaLoja.model.endereco.Residencia;
 import SistemaLoja.model.endereco.Rua;
 import SistemaLoja.model.pessoa_fisica.Cliente;
@@ -18,7 +19,8 @@ import SistemaLoja.model.produtos.Produto;
  */
 public interface AtualizarDados {
     public boolean atualizarCliente(Cliente cliente);
-    public boolean atualizarTelefone(Telefone telefone);
+    public boolean atualizarTelefoneCliente(TelefoneCliente telefone);
+    public boolean atualizarTelefoneDistribuidor(TelefoneDistribuidor telefone);
     public boolean atualizarResidencia(Residencia residencia);
     public boolean atualizarRua(Rua rua);
     public boolean atualizarDistribuidor(Distribuidor distribuidor);
