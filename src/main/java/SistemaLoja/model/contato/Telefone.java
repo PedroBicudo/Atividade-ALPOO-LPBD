@@ -12,6 +12,7 @@ package SistemaLoja.model.contato;
 public class Telefone {
     private int idTelefone;
     private String telefone;
+    
 
     public int getIdTelefone() {
         return idTelefone;
@@ -30,8 +31,8 @@ public class Telefone {
     }
 
     public Telefone(int idTelefone, String telefone) {
-        this.setIdTelefone(idTelefone);
-        this.setTelefone(telefone);
+        setIdTelefone(idTelefone);
+        setTelefone(telefone);
     }
     
 }
