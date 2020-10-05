@@ -13,7 +13,6 @@ import java.sql.Date;
  */
 public class Cliente {
     private int idCliente;
-    private int idfkTelefone;
     private int idfkResidencia;
     private String nome;
     private Date dataNascimento;
@@ -25,14 +24,6 @@ public class Cliente {
 
     public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
-    }
-
-    public int getIdfkTelefone() {
-        return idfkTelefone;
-    }
-
-    public void setIdfkTelefone(int idfkTelefone) {
-        this.idfkTelefone = idfkTelefone;
     }
 
     public int getIdfkResidencia() {
@@ -67,9 +58,8 @@ public class Cliente {
         this.email = email;
     }
 
-    public Cliente(int idCliente, int idfkTelefone, int idfkResidencia, String nome, Date dataNascimento, String email) {
+    public Cliente(int idCliente, int idfkResidencia, String nome, Date dataNascimento, String email) {
         this.setIdCliente(idCliente);
-        this.setIdfkTelefone(idfkTelefone);
         this.setIdfkResidencia(idfkResidencia);
         this.setNome(nome);
         this.setDataNascimento(dataNascimento);

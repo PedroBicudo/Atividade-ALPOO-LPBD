@@ -11,7 +11,6 @@ package SistemaLoja.model.produtos;
  */
 public class Distribuidor {
     private int idDistribuidor;
-    private int idfkTelefone;
     private String nomeFantasia;
     private String razaoSocial;
     private String email;
@@ -22,14 +21,6 @@ public class Distribuidor {
 
     public void setIdDistribuidor(int idDistribuidor) {
         this.idDistribuidor = idDistribuidor;
-    }
-
-    public int getIdfkTelefone() {
-        return idfkTelefone;
-    }
-
-    public void setIdfkTelefone(int idfkTelefone) {
-        this.idfkTelefone = idfkTelefone;
     }
 
     public String getNomeFantasia() {
@@ -56,9 +47,8 @@ public class Distribuidor {
         this.email = email;
     }
 
-    public Distribuidor(int idDistribuidor, int idfkTelefone, String nomeFantasia, String razaoSocial, String email) {
+    public Distribuidor(int idDistribuidor, String nomeFantasia, String razaoSocial, String email) {
         this.setIdDistribuidor(idDistribuidor);
-        this.setIdfkTelefone(idfkTelefone);
         this.setNomeFantasia(nomeFantasia);
         this.setRazaoSocial(razaoSocial);
         this.setEmail(email);
