@@ -6,7 +6,8 @@
 package SistemaLoja.database.conexao.insert;
 
 import SistemaLoja.database.conexao.IBancoDao;
-import SistemaLoja.model.contato.Telefone;
+import SistemaLoja.model.contato.TelefoneCliente;
+import SistemaLoja.model.contato.TelefoneDistribuidor;
 import SistemaLoja.model.endereco.Bairro;
 import SistemaLoja.model.endereco.Residencia;
 import SistemaLoja.model.endereco.Rua;
@@ -30,6 +31,8 @@ public class SQLServerInsert implements InserirDados {
         this.database = database;
     }
     
+    
+    
     @Override
     public boolean inserirCliente(Cliente cliente) {
         try {
@@ -49,11 +52,28 @@ public class SQLServerInsert implements InserirDados {
     }
 
     @Override
-    public boolean inserirTelefone(Telefone telefone) {
+    public boolean inserirTelefoneCliente(TelefoneCliente telefone) {
         try {
-            String sqlInsert = "INSERT INTO TELEFONE(TELEFONE) VALUES(?)";
+            String sqlInsert = "INSERT INTO TELEFONE_CLIENTE(TELEFONE, IDFK_CLIENTE) VALUES(?, ?)";
             PreparedStatement prepareStatement = database.getConnection().prepareStatement(sqlInsert);
             prepareStatement.setString(1, telefone.getTelefone());
+            prepareStatement.setInt(2, telefone.getIdfkCliente());
+            prepareStatement.executeUpdate();
+            
+            return true;
+        } catch (SQLException exception) {
+            
+            return false;
+        }
+    }
+
+    @Override
+    public boolean inserirTelefoneDistribuidor(TelefoneDistribuidor telefone) {
+        try {
+            String sqlInsert = "INSERT INTO TELEFONE_DISTRIBUIDOR(TELEFONE, IDFK_DISTRIBUIDOR) VALUES(?, ?)";
+            PreparedStatement prepareStatement = database.getConnection().prepareStatement(sqlInsert);
+            prepareStatement.setString(1, telefone.getTelefone());
+            prepareStatement.setInt(2, telefone.getIdfkDistribuidor());
             prepareStatement.executeUpdate();
             
             return true;

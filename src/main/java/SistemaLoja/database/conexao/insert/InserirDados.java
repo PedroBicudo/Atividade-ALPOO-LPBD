@@ -6,6 +6,8 @@
 package SistemaLoja.database.conexao.insert;
 
 import SistemaLoja.model.contato.Telefone;
+import SistemaLoja.model.contato.TelefoneCliente;
+import SistemaLoja.model.contato.TelefoneDistribuidor;
 import SistemaLoja.model.endereco.Bairro;
 import SistemaLoja.model.endereco.Residencia;
 import SistemaLoja.model.endereco.Rua;
@@ -21,7 +23,8 @@ import SistemaLoja.model.produtos.Venda;
  */
 public interface InserirDados {
     public boolean inserirCliente(Cliente cliente);
-    public boolean inserirTelefone(Telefone telefone);
+    public boolean inserirTelefoneCliente(TelefoneCliente telefone);
+    public boolean inserirTelefoneDistribuidor(TelefoneDistribuidor telefone);
     public boolean inserirBairro(Bairro bairro);
     public boolean inserirResidencia(Residencia residencia);
     public boolean inserirRua(Rua rua);
