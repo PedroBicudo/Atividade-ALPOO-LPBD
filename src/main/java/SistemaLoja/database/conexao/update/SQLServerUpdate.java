@@ -7,6 +7,8 @@ package SistemaLoja.database.conexao.update;
 
 import SistemaLoja.database.conexao.IBancoDao;
 import SistemaLoja.model.contato.Telefone;
+import SistemaLoja.model.contato.TelefoneCliente;
+import SistemaLoja.model.contato.TelefoneDistribuidor;
 import SistemaLoja.model.endereco.Residencia;
 import SistemaLoja.model.endereco.Rua;
 import SistemaLoja.model.pessoa_fisica.Cliente;
@@ -29,14 +31,13 @@ public class SQLServerUpdate implements AtualizarDados {
         @Override
     public boolean atualizarCliente(Cliente cliente) {
         try {
-            String sqlUpdate = "UPDATE CLIENTE SET IDFK_RESIDENCIA=?, IDFK_TELEFONE=?, DATA_NASC=?, EMAIL=?, NOME=? WHERE ID_CLIENTE=?";
+            String sqlUpdate = "UPDATE CLIENTE SET IDFK_RESIDENCIA=?, DATA_NASC=?, EMAIL=?, NOME=? WHERE ID_CLIENTE=?";
             PreparedStatement prepareStatement = database.getConnection().prepareStatement(sqlUpdate);
             prepareStatement.setInt(1, cliente.getIdfkResidencia());
-            prepareStatement.setInt(2, cliente.getIdfkTelefone());
-            prepareStatement.setDate(3, cliente.getDataNascimento());
-            prepareStatement.setString(4, cliente.getEmail());
-            prepareStatement.setString(5, cliente.getNome());
-            prepareStatement.setInt(6, cliente.getIdCliente());
+            prepareStatement.setDate(2, cliente.getDataNascimento());
+            prepareStatement.setString(3, cliente.getEmail());
+            prepareStatement.setString(4, cliente.getNome());
+            prepareStatement.setInt(5, cliente.getIdCliente());
             prepareStatement.executeUpdate();
             
             return true;
@@ -47,9 +48,9 @@ public class SQLServerUpdate implements AtualizarDados {
     }
 
     @Override
-    public boolean atualizarTelefone(Telefone telefone) {
+    public boolean atualizarTelefoneCliente(TelefoneCliente telefone) {
         try {
-            String sqlUpdate = "UPDATE TELEFONE SET TELEFONE=? WHERE ID_TELEFONE=?";
+            String sqlUpdate = "UPDATE TELEFONE_CLIENTE SET TELEFONE=? WHERE ID_TELEFONE=?";
             PreparedStatement prepareStatement = database.getConnection().prepareStatement(sqlUpdate);
             prepareStatement.setString(1, telefone.getTelefone());
             prepareStatement.setInt(2, telefone.getIdTelefone());
@@ -62,6 +63,22 @@ public class SQLServerUpdate implements AtualizarDados {
         }        
     }
 
+    @Override
+    public boolean atualizarTelefoneDistribuidor(TelefoneDistribuidor telefone) {
+        try {
+            String sqlUpdate = "UPDATE TELEFONE_DISTRIBUIDOR SET TELEFONE=? WHERE ID_TELEFONE=?";
+            PreparedStatement prepareStatement = database.getConnection().prepareStatement(sqlUpdate);
+            prepareStatement.setString(1, telefone.getTelefone());
+            prepareStatement.setInt(2, telefone.getIdTelefone());
+            prepareStatement.executeUpdate();
+            
+            return true;
+        } catch (SQLException exception) {
+            
+            return false;
+        }        
+    }
+    
     @Override
     public boolean atualizarResidencia(Residencia residencia) {
         try {
@@ -100,13 +117,12 @@ public class SQLServerUpdate implements AtualizarDados {
     @Override
     public boolean atualizarDistribuidor(Distribuidor distribuidor) {
         try {
-            String sqlUpdate = "UPDATE DISTRIBUIDOR SET NOME_FANTASIA=?, RAZAO_SOCIAL=?, EMAIL=?, IDFK_TELEFONE=? WHERE ID_DISTRIBUIDOR=?";
+            String sqlUpdate = "UPDATE DISTRIBUIDOR SET NOME_FANTASIA=?, RAZAO_SOCIAL=?, EMAIL=? WHERE ID_DISTRIBUIDOR=?";
             PreparedStatement prepareStatement = database.getConnection().prepareStatement(sqlUpdate);
             prepareStatement.setString(1, distribuidor.getNomeFantasia());
             prepareStatement.setString(2, distribuidor.getRazaoSocial());
             prepareStatement.setString(3, distribuidor.getEmail());
-            prepareStatement.setInt(4, distribuidor.getIdfkTelefone());
-            prepareStatement.setInt(5, distribuidor.getIdDistribuidor());
+            prepareStatement.setInt(4, distribuidor.getIdDistribuidor());
             prepareStatement.executeUpdate();
             
             return true;

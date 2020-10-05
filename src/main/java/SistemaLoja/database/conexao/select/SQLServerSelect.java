@@ -118,14 +118,13 @@ public class SQLServerSelect implements SelecionarDados {
     public ArrayList<Cliente> selecionarClientes() {
         ArrayList<Cliente> clientesEncontrados = new ArrayList<>();
         try {
-            String sqlSelect = "SELECT ID_CLIENTE, NOME, DATA_NASC, EMAIL, IDFK_TELEFONE, IDFK_RESIDENCIA FROM CLIENTE";
+            String sqlSelect = "SELECT ID_CLIENTE, NOME, DATA_NASC, EMAIL, IDFK_RESIDENCIA FROM CLIENTE";
             PreparedStatement prepareStatement = database.getConnection().prepareStatement(sqlSelect);
             ResultSet clientes = prepareStatement.executeQuery();
             while (clientes.next()) {
                 clientesEncontrados.add(
                         new Cliente(
                                 clientes.getInt("ID_CLIENTE"), 
-                                clientes.getInt("IDFK_TELEFONE"), 
                                 clientes.getInt("IDFK_RESIDENCIA"), 
                                 clientes.getString("NOME"), 
                                 clientes.getDate("DATA_NASC"), 
@@ -186,12 +185,12 @@ public class SQLServerSelect implements SelecionarDados {
     public ArrayList<Cliente> selecionarClientesSemAColunaEmail() {
         ArrayList<Cliente> clientesEncontrados = new ArrayList<>();
         try {
-            String sqlSelect = "SELECT ID_CLIENTE, NOME, DATA_NASC, IDFK_TELEFONE, IDFK_RESIDENCIA FROM CLIENTE";
+            String sqlSelect = "SELECT ID_CLIENTE, NOME, DATA_NASC, IDFK_RESIDENCIA FROM CLIENTE";
             PreparedStatement prepareStatement = database.getConnection().prepareStatement(sqlSelect);
             ResultSet clientes = prepareStatement.executeQuery();
             while (clientes.next()) {
                 clientesEncontrados.add(
-                        new Cliente(clientes.getInt("ID_CLIENTE"), clientes.getInt("IDFK_TELEFONE"), clientes.getInt("IDFK_RESIDENCIA"), clientes.getString("NOME"), clientes.getDate("DATA_NASC"), null)
+                        new Cliente(clientes.getInt("ID_CLIENTE"), clientes.getInt("IDFK_RESIDENCIA"), clientes.getString("NOME"), clientes.getDate("DATA_NASC"), null)
                 );
             }
             
@@ -226,7 +225,7 @@ public class SQLServerSelect implements SelecionarDados {
     public Cliente selecionarClienteById(int clienteId) {
         Cliente clienteEncontrado;
         try {
-            String sqlSelect = "SELECT ID_CLIENTE, NOME, DATA_NASC, EMAIL, IDFK_TELEFONE, IDFK_RESIDENCIA FROM CLIENTE WHERE ID_CLIENTE=?";
+            String sqlSelect = "SELECT ID_CLIENTE, NOME, DATA_NASC, EMAIL, IDFK_RESIDENCIA FROM CLIENTE WHERE ID_CLIENTE=?";
             PreparedStatement prepareStatement = database.getConnection().prepareStatement(sqlSelect);
             prepareStatement.setInt(1, clienteId);
             ResultSet cliente = prepareStatement.executeQuery();
@@ -234,7 +233,6 @@ public class SQLServerSelect implements SelecionarDados {
             clienteEncontrado = 
                     new Cliente(
                             cliente.getInt("ID_CLIENTE"), 
-                            cliente.getInt("IDFK_TELEFONE"), 
                             cliente.getInt("IDFK_RESIDENCIA"), 
                             cliente.getString("NOME"), 
                             cliente.getDate("DATA_NASC"), 

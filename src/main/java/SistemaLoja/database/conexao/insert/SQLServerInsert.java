@@ -33,13 +33,12 @@ public class SQLServerInsert implements InserirDados {
     @Override
     public boolean inserirCliente(Cliente cliente) {
         try {
-            String sqlInsert = "INSERT INTO CLIENTE(IDFK_RESIDENCIA, IDFK_TELEFONE, DATA_NASC, EMAIL, NOME) VALUES(?, ?, ?, ?, ?)";
+            String sqlInsert = "INSERT INTO CLIENTE(IDFK_RESIDENCIA, DATA_NASC, EMAIL, NOME) VALUES(?, ?, ?, ?, ?)";
             PreparedStatement prepareStatement = database.getConnection().prepareStatement(sqlInsert);
             prepareStatement.setInt(1, cliente.getIdfkResidencia());
-            prepareStatement.setInt(2, cliente.getIdfkTelefone());
-            prepareStatement.setDate(1, cliente.getDataNascimento());
-            prepareStatement.setString(1, cliente.getEmail());
-            prepareStatement.setString(1, cliente.getNome());
+            prepareStatement.setDate(2, cliente.getDataNascimento());
+            prepareStatement.setString(3, cliente.getEmail());
+            prepareStatement.setString(4, cliente.getNome());
             prepareStatement.executeUpdate();
             
             return true;
@@ -116,12 +115,11 @@ public class SQLServerInsert implements InserirDados {
     @Override
     public boolean inserirDistribuidor(Distribuidor distribuidor) {
         try {
-            String sqlInsert = "INSERT INTO DISTRIBUIDOR(NOME_FANTASIA, RAZAO_SOCIAL, EMAIL, IDFK_TELEFONE) VALUES(?, ?, ?, ?)";
+            String sqlInsert = "INSERT INTO DISTRIBUIDOR(NOME_FANTASIA, RAZAO_SOCIAL, EMAIL) VALUES(?, ?, ?)";
             PreparedStatement prepareStatement = database.getConnection().prepareStatement(sqlInsert);
             prepareStatement.setString(1, distribuidor.getNomeFantasia());
             prepareStatement.setString(2, distribuidor.getRazaoSocial());
             prepareStatement.setString(3, distribuidor.getEmail());
-            prepareStatement.setInt(4, distribuidor.getIdfkTelefone());
             prepareStatement.executeUpdate();
             
             return true;
