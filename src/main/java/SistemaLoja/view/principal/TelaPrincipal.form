@@ -26,8 +26,8 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jButton3" alignment="0" pref="201" max="32767" attributes="0"/>
-                  <Component id="jButton2" alignment="0" max="32767" attributes="0"/>
+                  <Component id="btnPainelCadastro" alignment="0" pref="201" max="32767" attributes="0"/>
+                  <Component id="btnPainelExtras" alignment="0" max="32767" attributes="0"/>
                   <Component id="btnComprarProduto" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="102" max="32767" attributes="0"/>
@@ -40,9 +40,9 @@
               <EmptySpace pref="70" max="32767" attributes="0"/>
               <Component id="btnComprarProduto" min="-2" pref="38" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-              <Component id="jButton3" min="-2" pref="38" max="-2" attributes="0"/>
+              <Component id="btnPainelCadastro" min="-2" pref="38" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-              <Component id="jButton2" min="-2" pref="38" max="-2" attributes="0"/>
+              <Component id="btnPainelExtras" min="-2" pref="38" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -57,20 +57,20 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnComprarProdutoActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="btnPainelExtras">
       <Properties>
         <Property name="text" type="java.lang.String" value="Abrir painel de extras"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPainelExtrasActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="btnPainelCadastro">
       <Properties>
         <Property name="text" type="java.lang.String" value="Abrir painel de cadastro"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPainelCadastroActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
