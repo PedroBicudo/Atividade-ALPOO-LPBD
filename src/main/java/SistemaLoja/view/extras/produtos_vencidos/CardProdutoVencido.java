@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package SistemaLoja.view.compra;
+package SistemaLoja.view.extras.produtos_vencidos;
 
+import SistemaLoja.view.compra.*;
 import SistemaLoja.model.produtos.Produto;
 import SistemaLoja.model.produtos.ProdutoComprado;
 import SistemaLoja.utils.Conversor;
@@ -13,41 +14,21 @@ import SistemaLoja.utils.Conversor;
  *
  * @author pedroh
  */
-public class ContainerCompraProduto extends javax.swing.JPanel {
+public class CardProdutoVencido extends javax.swing.JPanel {
     
-    private int posicaoProdutoNoContainer;
-    private int quantiaEspecificada;
-    private ProdutosCompradosAcoes containerPai;
     private Produto produto;
 
     /**
      * Creates new form ContainerCompraProduto
      */
 
-    public ContainerCompraProduto(int posicaoProdutoNoContainer, ProdutosCompradosAcoes containerPai, Produto produto) {
+    public CardProdutoVencido(Produto produto) {
         initComponents();
-        this.posicaoProdutoNoContainer = posicaoProdutoNoContainer;
-        this.containerPai = containerPai;
-        this.produto = produto;
+        setProduto(produto);
         lbNomeDoProduto.setText(produto.getDescricao());
         lbDataValidade.setText(Conversor.dateToString(produto.getDataValidade()));
-        lbPreco.setText(String.format("%.2f", produto.getPrecoVenda()));
-    }
-
-    public int getPosicaoProdutoNoContainer() {
-        return posicaoProdutoNoContainer;
-    }
-
-    public void setPosicaoProdutoNoContainer(int posicaoProdutoNoContainer) {
-        this.posicaoProdutoNoContainer = posicaoProdutoNoContainer;
-    }
-
-    public ProdutosCompradosAcoes getContainerPai() {
-        return containerPai;
-    }
-
-    public void setContainerPai(ProdutosCompradosAcoes containerPai) {
-        this.containerPai = containerPai;
+        lbEstoque.setText(String.valueOf(produto.getEstoque()));
+        
     }
 
     public Produto getProduto() {
@@ -70,11 +51,9 @@ public class ContainerCompraProduto extends javax.swing.JPanel {
 
         jButton1 = new javax.swing.JButton();
         lbNomeDoProduto = new javax.swing.JLabel();
-        lbQuantia = new javax.swing.JLabel();
-        btnDiminuirQuantidade = new javax.swing.JButton();
-        btnAumentarQuantidade = new javax.swing.JButton();
+        lbEstoque = new javax.swing.JLabel();
         lbDataValidade = new javax.swing.JLabel();
-        lbPreco = new javax.swing.JLabel();
+        lbEstoqueText = new javax.swing.JLabel();
         lbValidade = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
@@ -83,50 +62,33 @@ public class ContainerCompraProduto extends javax.swing.JPanel {
 
         lbNomeDoProduto.setText("PRODUTO");
 
-        lbQuantia.setText("0");
-
-        btnDiminuirQuantidade.setText("-");
-        btnDiminuirQuantidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDiminuirQuantidadeActionPerformed(evt);
-            }
-        });
-
-        btnAumentarQuantidade.setText("+");
-        btnAumentarQuantidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAumentarQuantidadeActionPerformed(evt);
-            }
-        });
+        lbEstoque.setText("0");
 
         lbDataValidade.setText("VALIDADE");
 
-        lbPreco.setText("PRECO");
+        lbEstoqueText.setText("Estoque");
 
-        lbValidade.setText("Válido até");
+        lbValidade.setText("Vencido em");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(lbNomeDoProduto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
-                .addComponent(lbPreco)
-                .addGap(28, 28, 28)
-                .addComponent(btnDiminuirQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbQuantia)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnAumentarQuantidade)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(lbValidade, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
-                .addComponent(lbDataValidade, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbNomeDoProduto)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
+                        .addComponent(lbEstoqueText)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbEstoque)
+                        .addGap(61, 61, 61))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbValidade, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbDataValidade, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,42 +96,22 @@ public class ContainerCompraProduto extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbNomeDoProduto)
-                    .addComponent(lbQuantia)
-                    .addComponent(btnAumentarQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDiminuirQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbPreco))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(lbEstoque)
+                    .addComponent(lbEstoqueText))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbDataValidade)
                     .addComponent(lbValidade))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnAumentarQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAumentarQuantidadeActionPerformed
-        if (quantiaEspecificada < produto.getEstoque()) {
-            quantiaEspecificada++;
-            lbQuantia.setText(String.valueOf(quantiaEspecificada));
-            containerPai.atualizarProdutoComprado(posicaoProdutoNoContainer, new ProdutoComprado(produto, quantiaEspecificada));
-        }
-    }//GEN-LAST:event_btnAumentarQuantidadeActionPerformed
-
-    private void btnDiminuirQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiminuirQuantidadeActionPerformed
-        if (quantiaEspecificada > 0) {
-            quantiaEspecificada--;
-            lbQuantia.setText(String.valueOf(quantiaEspecificada));            
-            containerPai.atualizarProdutoComprado(posicaoProdutoNoContainer, new ProdutoComprado(produto, quantiaEspecificada));
-        }
-    }//GEN-LAST:event_btnDiminuirQuantidadeActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAumentarQuantidade;
-    private javax.swing.JButton btnDiminuirQuantidade;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel lbDataValidade;
+    private javax.swing.JLabel lbEstoque;
+    private javax.swing.JLabel lbEstoqueText;
     private javax.swing.JLabel lbNomeDoProduto;
-    private javax.swing.JLabel lbPreco;
-    private javax.swing.JLabel lbQuantia;
     private javax.swing.JLabel lbValidade;
     // End of variables declaration//GEN-END:variables
 }
