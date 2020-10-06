@@ -138,8 +138,7 @@ public class SQLServerSelect implements SelecionarDados {
                         database.getSelecionarActions()
                                 .selecionarTelefonesByClienteId(clientes.getInt("ID_CLIENTE"));
                 
-                clientesEncontrados.add(
-                        new Cliente(
+                clientesEncontrados.add(new Cliente(
                                 clientes.getInt("ID_CLIENTE"), 
                                 clientes.getString("NOME"), 
                                 clientes.getDate("DATA_NASC"), 
@@ -217,8 +216,7 @@ public class SQLServerSelect implements SelecionarDados {
                         database.getSelecionarActions()
                                 .selecionarTelefonesByClienteId(clientes.getInt("ID_CLIENTE"));
                 
-                clientesEncontrados.add(
-                        new Cliente(
+                clientesEncontrados.add(new Cliente(
                                 clientes.getInt("ID_CLIENTE"), 
                                 clientes.getString("NOME"), 
                                 clientes.getDate("DATA_NASC"), 
@@ -391,7 +389,7 @@ public class SQLServerSelect implements SelecionarDados {
     public ArrayList<TelefoneCliente> selecionarTelefonesByClienteId(int clienteId) {
         ArrayList<TelefoneCliente> telefonesDoCliente = new ArrayList<>();
         try {
-            String sqlSelect = "SELECT IDFK_CLIENTE, TELEFONE WHERE IDFK_CLIENTE = ?";
+            String sqlSelect = "SELECT IDFK_CLIENTE, TELEFONE FROM TELEFONE_CLIENTE WHERE IDFK_CLIENTE = ?";
             PreparedStatement prepareStatement = database.getConnection().prepareStatement(sqlSelect);
             prepareStatement.setInt(1, clienteId);
             ResultSet telefone = prepareStatement.executeQuery();
@@ -405,5 +403,5 @@ public class SQLServerSelect implements SelecionarDados {
         
         return telefonesDoCliente;        
     }
-    
+
 }
