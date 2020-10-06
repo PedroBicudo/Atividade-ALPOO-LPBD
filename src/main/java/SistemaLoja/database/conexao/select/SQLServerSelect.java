@@ -325,7 +325,7 @@ public class SQLServerSelect implements SelecionarDados {
     public ArrayList<Produto> selecionarProdutos() {
         ArrayList<Produto> produtosEncontrados = new ArrayList<>();
         try {
-            String sqlSelect = "SELECT ID_PRODUTO, ESTOQUE, DATA_VALIDADE, DESCRICAO, PRECO_CUSTO, PRECO_VENDA, IDFK_DISTRIBUIDOR FROM PRODUTO";
+            String sqlSelect = "SELECT ID_PRODUTO, ESTOQUE, DATA_VALIDADE, DESCRICAO, PRECO_CUSTO, PRECO_VENDA, IDFK_DISTRIBUIDOR FROM PRODUTO WHERE DATA_VALIDADE > CURRENT_TIMESTAMP AND ESTOQUE > 0";
             PreparedStatement prepareStatement = database.getConnection().prepareStatement(sqlSelect);
             ResultSet produtos = prepareStatement.executeQuery();
             while (produtos.next()) {
