@@ -13,4 +13,5 @@ import SistemaLoja.model.produtos.ProdutoComprado;
  */
 public interface ProdutosCompradosAcoes {
     public void atualizarProdutoComprado(int posicaoNaLista, ProdutoComprado produtoComprado);
+    public void resetarTela();
 }

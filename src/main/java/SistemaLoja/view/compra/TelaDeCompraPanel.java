@@ -76,6 +76,7 @@ public class TelaDeCompraPanel extends javax.swing.JFrame implements ProdutosCom
         btnCarregarProdutos = new javax.swing.JButton();
         btnValidarCliente = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        btnReiniciarTela = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -108,16 +109,24 @@ public class TelaDeCompraPanel extends javax.swing.JFrame implements ProdutosCom
             }
         });
 
+        btnReiniciarTela.setText("Reiniciar tela");
+        btnReiniciarTela.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReiniciarTelaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnCarregarProdutos)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnCarregarProdutos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnReiniciarTela, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnFinalizarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -146,7 +155,9 @@ public class TelaDeCompraPanel extends javax.swing.JFrame implements ProdutosCom
                     .addComponent(btnValidarCliente)
                     .addComponent(jLabel2))
                 .addGap(79, 79, 79)
-                .addComponent(btnCarregarProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnCarregarProdutos, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(btnReiniciarTela, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrollPaneProdutos, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
@@ -194,11 +205,31 @@ public class TelaDeCompraPanel extends javax.swing.JFrame implements ProdutosCom
                 txtFieldCodCliente.setText("");
             } else {
                 txtFieldCodCliente.setEnabled(false);
-                txtFieldCodCliente.setForeground(Color.GREEN);
                 btnCarregarProdutos.setEnabled(true);
             }
         }
     }//GEN-LAST:event_btnValidarClienteActionPerformed
+
+    private void btnReiniciarTelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReiniciarTelaActionPerformed
+        // TODO add your handling code here:
+        resetarTela();
+    }//GEN-LAST:event_btnReiniciarTelaActionPerformed
+
+    @Override
+    public void resetarTela() {
+        txtFieldCodCliente.setEnabled(true);
+        txtFieldCodCliente.setText("");
+        btnCarregarProdutos.setEnabled(false);
+        btnFinalizarCompra.setEnabled(false);
+        paneProdutosContainer.removeAll();
+        paneProdutosContainer.updateUI();
+        
+        totalDaCompra = 0F;
+        produtosCompradosPeloCliente = null;
+        produtosDoBanco = new ArrayList<>();
+        clienteDaSessao = null;
+        
+    }
 
     @Override
     public void atualizarProdutoComprado(int posicaoNaLista, ProdutoComprado produtoComprado) {
@@ -222,9 +253,8 @@ public class TelaDeCompraPanel extends javax.swing.JFrame implements ProdutosCom
             totalDaCompra += produtoComprado.getSubTotal();
         }
     }
-
     
-    public void popularListaDeProdutos() {
+    private void popularListaDeProdutos() {
         paneProdutosContainer.removeAll();
         produtosDoBanco = database.getSelecionarActions().selecionarProdutos();
         produtosCompradosPeloCliente = new ProdutoComprado[produtosDoBanco.size()];
@@ -275,6 +305,7 @@ public class TelaDeCompraPanel extends javax.swing.JFrame implements ProdutosCom
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCarregarProdutos;
     private javax.swing.JButton btnFinalizarCompra;
+    private javax.swing.JButton btnReiniciarTela;
     private javax.swing.JButton btnValidarCliente;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lbCodCliente;
