@@ -7,6 +7,7 @@ package SistemaLoja.view.compra;
 
 import SistemaLoja.model.produtos.Produto;
 import SistemaLoja.model.produtos.ProdutoComprado;
+import SistemaLoja.utils.Conversor;
 
 /**
  *
@@ -29,7 +30,7 @@ public class ContainerCompraProduto extends javax.swing.JPanel {
         this.containerPai = containerPai;
         this.produto = produto;
         lbNomeDoProduto.setText(produto.getDescricao());
-        lbDataValidade.setText(produto.getDataValidade().toString());
+        lbDataValidade.setText(Conversor.dateToString(produto.getDataValidade()));
         lbPreco.setText(String.format("%.2f", produto.getPrecoVenda()));
     }
 
@@ -74,10 +75,13 @@ public class ContainerCompraProduto extends javax.swing.JPanel {
         btnAumentarQuantidade = new javax.swing.JButton();
         lbDataValidade = new javax.swing.JLabel();
         lbPreco = new javax.swing.JLabel();
+        lbValidade = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        lbNomeDoProduto.setText("PRODUTO");
 
         lbQuantia.setText("0");
 
@@ -95,45 +99,50 @@ public class ContainerCompraProduto extends javax.swing.JPanel {
             }
         });
 
+        lbDataValidade.setText("VALIDADE");
+
+        lbPreco.setText("PRECO");
+
+        lbValidade.setText("Válido até");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbDataValidade, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbNomeDoProduto)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(115, 115, 115)
+                .addComponent(lbNomeDoProduto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
                 .addComponent(lbPreco)
-                .addGap(18, 18, 18)
+                .addGap(28, 28, 28)
                 .addComponent(btnDiminuirQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbQuantia)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAumentarQuantidade)
-                .addGap(28, 28, 28))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(lbValidade, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(lbDataValidade, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(lbPreco))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lbNomeDoProduto)
-                        .addComponent(lbQuantia)
-                        .addComponent(btnAumentarQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnDiminuirQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addComponent(lbDataValidade)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbNomeDoProduto)
+                    .addComponent(lbQuantia)
+                    .addComponent(btnAumentarQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDiminuirQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbPreco))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbDataValidade)
+                    .addComponent(lbValidade))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -161,5 +170,6 @@ public class ContainerCompraProduto extends javax.swing.JPanel {
     private javax.swing.JLabel lbNomeDoProduto;
     private javax.swing.JLabel lbPreco;
     private javax.swing.JLabel lbQuantia;
+    private javax.swing.JLabel lbValidade;
     // End of variables declaration//GEN-END:variables
 }

@@ -32,25 +32,23 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="lbDataValidade" min="-2" pref="70" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="lbNomeDoProduto" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="44" max="32767" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
+              <Component id="lbNomeDoProduto" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="138" max="32767" attributes="0"/>
               <Component id="lbPreco" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Component id="btnDiminuirQuantidade" min="-2" pref="37" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="lbQuantia" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="btnAumentarQuantidade" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+              <Component id="lbValidade" min="-2" pref="61" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+              <Component id="lbDataValidade" min="-2" pref="70" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -58,27 +56,28 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                      <Component id="lbPreco" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lbNomeDoProduto" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbQuantia" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnAumentarQuantidade" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                      <Component id="btnDiminuirQuantidade" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                  </Group>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lbNomeDoProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbQuantia" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnAumentarQuantidade" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                  <Component id="btnDiminuirQuantidade" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                  <Component id="lbPreco" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="20" max="32767" attributes="0"/>
-              <Component id="lbDataValidade" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lbDataValidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbValidade" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JLabel" name="lbNomeDoProduto">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="PRODUTO"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbQuantia">
       <Properties>
@@ -102,8 +101,19 @@
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lbDataValidade">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="VALIDADE"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lbPreco">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="PRECO"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbValidade">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="V&#xe1;lido at&#xe9;"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
