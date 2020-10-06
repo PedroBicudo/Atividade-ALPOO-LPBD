@@ -6,10 +6,15 @@
 package SistemaLoja.database.conexao.select;
 
 import SistemaLoja.database.conexao.IBancoDao;
+import SistemaLoja.database.conexao.SQLServerDao;
+import SistemaLoja.model.contato.Telefone;
+import SistemaLoja.model.contato.TelefoneCliente;
 import SistemaLoja.model.endereco.Bairro;
 import SistemaLoja.model.endereco.Cidade;
+import SistemaLoja.model.endereco.Endereco;
 import SistemaLoja.model.endereco.Estado;
 import SistemaLoja.model.endereco.Residencia;
+import SistemaLoja.model.endereco.Rua;
 import SistemaLoja.model.pessoa_fisica.Cliente;
 import SistemaLoja.model.produtos.ClienteEVenda;
 import SistemaLoja.model.produtos.Produto;
@@ -118,17 +123,27 @@ public class SQLServerSelect implements SelecionarDados {
     public ArrayList<Cliente> selecionarClientes() {
         ArrayList<Cliente> clientesEncontrados = new ArrayList<>();
         try {
-            String sqlSelect = "SELECT ID_CLIENTE, NOME, DATA_NASC, EMAIL, IDFK_RESIDENCIA FROM CLIENTE";
+            String sqlSelect = "SELECT ID_CLIENTE, NOME, DATA_NASC, EMAIL, ID_RESIDENCIA, IDFK_RESIDENCIA, NUMERO_DA_CASA, DESCRICAO, RUA, BAIRRO, CIDADE, ESTADO_SIGLA, ESTADO_NOME FROM CLIENTE INNER JOIN ENDERECO ON CLIENTE.IDFK_RESIDENCIA = ENDERECO.ID_RESIDENCIA";
             PreparedStatement prepareStatement = database.getConnection().prepareStatement(sqlSelect);
             ResultSet clientes = prepareStatement.executeQuery();
             while (clientes.next()) {
+                Endereco enderecoCliente = new Endereco(
+                        new Residencia(0, 0, clientes.getInt("NUMERO_DA_CASA"), clientes.getString("DESCRICAO")),
+                        new Rua(0, 0, clientes.getString("RUA")),
+                        new Bairro(0, 0, clientes.getString("BAIRRO")),
+                        new Cidade(0, 0, clientes.getString("CIDADE")),
+                        new Estado(0, clientes.getString("ESTADO"), clientes.getString("ESTADO_NOME"))
+                );
+                Telefone telefoneCliente = database.getSelecionarActions().selecionarTelefoneByClienteId(clientes.getInt("ID_CLIENTE"));
+                
                 clientesEncontrados.add(
                         new Cliente(
                                 clientes.getInt("ID_CLIENTE"), 
-                                clientes.getInt("IDFK_RESIDENCIA"), 
                                 clientes.getString("NOME"), 
                                 clientes.getDate("DATA_NASC"), 
-                                clientes.getString("EMAIL")
+                                clientes.getString("EMAIL"),
+                                enderecoCliente,
+                                telefoneCliente
                     )
                 );
             }
@@ -189,8 +204,24 @@ public class SQLServerSelect implements SelecionarDados {
             PreparedStatement prepareStatement = database.getConnection().prepareStatement(sqlSelect);
             ResultSet clientes = prepareStatement.executeQuery();
             while (clientes.next()) {
+                Endereco enderecoCliente = new Endereco(
+                        new Residencia(0, 0, clientes.getInt("NUMERO_DA_CASA"), clientes.getString("DESCRICAO")),
+                        new Rua(0, 0, clientes.getString("RUA")),
+                        new Bairro(0, 0, clientes.getString("BAIRRO")),
+                        new Cidade(0, 0, clientes.getString("CIDADE")),
+                        new Estado(0, clientes.getString("ESTADO"), clientes.getString("ESTADO_NOME"))
+                );
+                Telefone telefoneCliente = database.getSelecionarActions().selecionarTelefoneByClienteId(clientes.getInt("ID_CLIENTE"));
+                
                 clientesEncontrados.add(
-                        new Cliente(clientes.getInt("ID_CLIENTE"), clientes.getInt("IDFK_RESIDENCIA"), clientes.getString("NOME"), clientes.getDate("DATA_NASC"), null)
+                        new Cliente(
+                                clientes.getInt("ID_CLIENTE"), 
+                                clientes.getString("NOME"), 
+                                clientes.getDate("DATA_NASC"), 
+                                clientes.getString("EMAIL"),
+                                enderecoCliente,
+                                telefoneCliente
+                    )
                 );
             }
             
@@ -228,16 +259,25 @@ public class SQLServerSelect implements SelecionarDados {
             String sqlSelect = "SELECT ID_CLIENTE, NOME, DATA_NASC, EMAIL, IDFK_RESIDENCIA FROM CLIENTE WHERE ID_CLIENTE=?";
             PreparedStatement prepareStatement = database.getConnection().prepareStatement(sqlSelect);
             prepareStatement.setInt(1, clienteId);
-            ResultSet cliente = prepareStatement.executeQuery();
-            cliente.next();
-            clienteEncontrado = 
-                    new Cliente(
-                            cliente.getInt("ID_CLIENTE"), 
-                            cliente.getInt("IDFK_RESIDENCIA"), 
-                            cliente.getString("NOME"), 
-                            cliente.getDate("DATA_NASC"), 
-                            cliente.getString("EMAIL")
-                    );
+            ResultSet clientes = prepareStatement.executeQuery();
+            clientes.next();
+            Endereco enderecoCliente = new Endereco(
+                new Residencia(0, 0, clientes.getInt("NUMERO_DA_CASA"), clientes.getString("DESCRICAO")),
+                new Rua(0, 0, clientes.getString("RUA")),
+                new Bairro(0, 0, clientes.getString("BAIRRO")),
+                new Cidade(0, 0, clientes.getString("CIDADE")),
+                new Estado(0, clientes.getString("ESTADO"), clientes.getString("ESTADO_NOME"))
+            );
+            Telefone telefoneCliente = database.getSelecionarActions().selecionarTelefoneByClienteId(clientes.getInt("ID_CLIENTE"));
+                
+            clienteEncontrado = new Cliente(
+                clientes.getInt("ID_CLIENTE"), 
+                clientes.getString("NOME"), 
+                clientes.getDate("DATA_NASC"), 
+                clientes.getString("EMAIL"),
+                enderecoCliente,
+                telefoneCliente
+            );
             
         } catch (SQLException exception) {
             System.out.println(exception.getMessage());
@@ -340,5 +380,29 @@ public class SQLServerSelect implements SelecionarDados {
         
         return produtosEncontrados;        
     }
+
+    @Override
+    public TelefoneCliente selecionarTelefoneByClienteId(int clienteId) {
+        TelefoneCliente telefoneDoCliente = null;
+        try {
+            String sqlSelect = "SELECT IDFK_CLIENTE, TELEFONE WHERE IDFK_CLIENTE = ?";
+            PreparedStatement prepareStatement = database.getConnection().prepareStatement(sqlSelect);
+            prepareStatement.setInt(1, clienteId);
+            ResultSet telefone = prepareStatement.executeQuery();
+            telefone.next();
+            telefoneDoCliente = new TelefoneCliente(clienteId, clienteId, telefone.getString("TELEFONE"));
+            
+        } catch (SQLException exception) {
+            System.out.println(exception.getMessage());
+        }        
+        
+        return telefoneDoCliente;        
+    }
     
+    
+    public static void main(String[] args) {
+        System.out.println(
+                SQLServerDao.getInstance().getSelecionarActions().selecionarClientesSemEmail().size()
+        );
+    }
 }
