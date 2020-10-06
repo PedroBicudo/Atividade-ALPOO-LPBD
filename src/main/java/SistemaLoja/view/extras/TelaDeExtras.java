@@ -5,6 +5,8 @@
  */
 package SistemaLoja.view.extras;
 
+import SistemaLoja.view.extras.cliente_sem_email.TelaDeClientesSemEmail;
+import SistemaLoja.view.extras.listagem_de_vendas.TelaDeVendas;
 import SistemaLoja.view.extras.produtos_vencidos.TelaComProdutosVencidos;
 import SistemaLoja.view.extras.total_de_compras.TelaComVendasPorCliente;
 import javax.swing.JFrame;
@@ -18,6 +20,8 @@ public class TelaDeExtras extends javax.swing.JFrame {
     
     private TelaComProdutosVencidos telaComProdutosVencidos;
     private TelaComVendasPorCliente telaComVendasPorCliente;
+    private TelaDeClientesSemEmail telaDeClientesSemEmail;
+    private TelaDeVendas telaDeVendas;
 
     /**
      * Creates new form TelaDeExtras
@@ -28,6 +32,10 @@ public class TelaDeExtras extends javax.swing.JFrame {
         telaComProdutosVencidos.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         telaComVendasPorCliente = new TelaComVendasPorCliente();
         telaComVendasPorCliente.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        telaDeClientesSemEmail = new TelaDeClientesSemEmail();
+        telaDeClientesSemEmail.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        telaDeVendas = new TelaDeVendas();
+        telaDeVendas.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
     }
 
@@ -114,6 +122,9 @@ public class TelaDeExtras extends javax.swing.JFrame {
 
     private void btnClientesSemEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesSemEmailActionPerformed
         // TODO add your handling code here:
+        if (!telaDeClientesSemEmail.isVisible()) {
+            telaDeClientesSemEmail.setVisible(true);
+        }
     }//GEN-LAST:event_btnClientesSemEmailActionPerformed
 
     private void btnVendasEm2020ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasEm2020ActionPerformed
@@ -125,6 +136,9 @@ public class TelaDeExtras extends javax.swing.JFrame {
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
         // TODO add your handling code here:
+        if (!telaDeVendas.isVisible()) {
+            telaDeVendas.setVisible(true);
+        }        
     }//GEN-LAST:event_btnVendasActionPerformed
 
     /**
