@@ -5,7 +5,7 @@
  */
 package SistemaLoja;
 
-import SistemaLoja.view.TelaPrincipal;
+import SistemaLoja.view.principal.TelaPrincipal;
 
 /**
  *
@@ -17,7 +17,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new TelaPrincipal().acessar();
+        new TelaPrincipal().setVisible(true);
     }
     
 }
