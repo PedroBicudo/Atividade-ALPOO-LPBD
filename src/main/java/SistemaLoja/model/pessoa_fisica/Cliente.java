@@ -5,6 +5,8 @@
  */
 package SistemaLoja.model.pessoa_fisica;
 
+import SistemaLoja.model.contato.Telefone;
+import SistemaLoja.model.endereco.Endereco;
 import java.sql.Date;
 
 /**
@@ -13,10 +15,11 @@ import java.sql.Date;
  */
 public class Cliente {
     private int idCliente;
-    private int idfkResidencia;
     private String nome;
     private Date dataNascimento;
-    private String email;
+    private String email; 
+    private Endereco endereco;
+    private Telefone telefone; 
 
     public int getIdCliente() {
         return idCliente;
@@ -24,14 +27,6 @@ public class Cliente {
 
     public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
-    }
-
-    public int getIdfkResidencia() {
-        return idfkResidencia;
-    }
-
-    public void setIdfkResidencia(int idfkResidencia) {
-        this.idfkResidencia = idfkResidencia;
     }
 
     public String getNome() {
@@ -58,12 +53,30 @@ public class Cliente {
         this.email = email;
     }
 
-    public Cliente(int idCliente, int idfkResidencia, String nome, Date dataNascimento, String email) {
-        this.setIdCliente(idCliente);
-        this.setIdfkResidencia(idfkResidencia);
-        this.setNome(nome);
-        this.setDataNascimento(dataNascimento);
-        this.setEmail(email);
+    public Endereco getEndereco() {
+        return endereco;
     }
- 
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public Telefone getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(Telefone telefone) {
+        this.telefone = telefone;
+    }
+
+    public Cliente(int idCliente, String nome, Date dataNascimento, String email, Endereco endereco, Telefone telefone) {
+        setIdCliente(idCliente);
+        setNome(nome);
+        setDataNascimento(dataNascimento);
+        setEmail(email);
+        setEndereco(endereco);
+        setTelefone(telefone);
+    }
+    
+    
 }
