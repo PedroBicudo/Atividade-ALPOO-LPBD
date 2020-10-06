@@ -33,7 +33,7 @@ public interface SelecionarDados {
     public Residencia selecionarResidenciaById(int residenciaId);
     public Produto selecionarProdutoById(int produtoId);
     public Cliente selecionarClienteById(int clienteId);
-    public TelefoneCliente selecionarTelefoneByClienteId(int clienteId);
+    public ArrayList<TelefoneCliente> selecionarTelefonesByClienteId(int clienteId);
     public Venda selecionarUltimaCompraDoCliente(int clienteId);
     public ArrayList<Cliente> selecionarClientesSemEmail();
     public ArrayList<Produto> selecionarProdutosVencidos();

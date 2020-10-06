@@ -6,8 +6,10 @@
 package SistemaLoja.model.pessoa_fisica;
 
 import SistemaLoja.model.contato.Telefone;
+import SistemaLoja.model.contato.TelefoneCliente;
 import SistemaLoja.model.endereco.Endereco;
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
@@ -19,7 +21,7 @@ public class Cliente {
     private Date dataNascimento;
     private String email; 
     private Endereco endereco;
-    private Telefone telefone; 
+    private TelefoneCliente telefones; 
 
     public int getIdCliente() {
         return idCliente;
@@ -61,21 +63,21 @@ public class Cliente {
         this.endereco = endereco;
     }
 
-    public Telefone getTelefone() {
-        return telefone;
+    public TelefoneCliente getTelefone() {
+        return telefones;
     }
 
-    public void setTelefone(Telefone telefone) {
-        this.telefone = telefone;
+    public void setTelefone(TelefoneCliente telefones) {
+        this.telefones = telefones;
     }
 
-    public Cliente(int idCliente, String nome, Date dataNascimento, String email, Endereco endereco, Telefone telefone) {
+    public Cliente(int idCliente, String nome, Date dataNascimento, String email, Endereco endereco, ArrayList<TelefoneCliente> telefone) {
         setIdCliente(idCliente);
         setNome(nome);
         setDataNascimento(dataNascimento);
         setEmail(email);
         setEndereco(endereco);
-        setTelefone(telefone);
+        setTelefone(telefones);
     }
     
     
