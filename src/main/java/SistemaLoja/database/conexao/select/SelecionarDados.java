@@ -27,6 +27,7 @@ public interface SelecionarDados {
     public ArrayList<Bairro> selecionarRuasByBairro(int bairroId);
     public ArrayList<Cliente> selecionarClientes();
     public ArrayList<Venda> selecionarVendas();
+    public ArrayList<Produto> selecionarProdutos();
     public Residencia selecionarResidenciaById(int residenciaId);
     public Produto selecionarProdutoById(int produtoId);
     public Cliente selecionarClienteById(int clienteId);
