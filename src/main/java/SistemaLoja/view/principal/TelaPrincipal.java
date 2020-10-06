@@ -5,6 +5,7 @@
  */
 package SistemaLoja.view.principal;
 
+import SistemaLoja.view.cadastro.TelaDeOpcoesDeCadastro;
 import SistemaLoja.view.compra.TelaDeCompraPanel;
 import SistemaLoja.view.extras.TelaDeExtras;
 import javax.swing.JFrame;
@@ -16,6 +17,7 @@ import javax.swing.JFrame;
 public class TelaPrincipal extends javax.swing.JFrame {
     
     private TelaDeCompraPanel telaDeCompra;
+    private TelaDeOpcoesDeCadastro telaDeOpcoesDeCadastro;
     private TelaDeExtras telaDeExtras;
 
     /**
@@ -28,6 +30,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         telaDeCompra.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         telaDeExtras = new TelaDeExtras();
         telaDeExtras.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        telaDeOpcoesDeCadastro = new TelaDeOpcoesDeCadastro();
+        telaDeOpcoesDeCadastro.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
     
     /**
@@ -107,6 +111,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnPainelCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPainelCadastroActionPerformed
         // TODO add your handling code here:
+        if (!telaDeOpcoesDeCadastro.isVisible()) {
+            telaDeOpcoesDeCadastro.setVisible(true);
+        }
     }//GEN-LAST:event_btnPainelCadastroActionPerformed
 
     /**
