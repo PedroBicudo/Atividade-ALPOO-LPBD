@@ -33,7 +33,7 @@ public class SQLServerUpdate implements AtualizarDados {
         try {
             String sqlUpdate = "UPDATE CLIENTE SET IDFK_RESIDENCIA=?, DATA_NASC=?, EMAIL=?, NOME=? WHERE ID_CLIENTE=?";
             PreparedStatement prepareStatement = database.getConnection().prepareStatement(sqlUpdate);
-            prepareStatement.setInt(1, cliente.getIdfkResidencia());
+            prepareStatement.setInt(1, cliente.getEndereco().getResidencia().getIdResidencia());
             prepareStatement.setDate(2, cliente.getDataNascimento());
             prepareStatement.setString(3, cliente.getEmail());
             prepareStatement.setString(4, cliente.getNome());

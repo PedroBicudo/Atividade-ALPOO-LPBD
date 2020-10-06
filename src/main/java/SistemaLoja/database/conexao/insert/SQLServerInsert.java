@@ -38,7 +38,7 @@ public class SQLServerInsert implements InserirDados {
         try {
             String sqlInsert = "INSERT INTO CLIENTE(IDFK_RESIDENCIA, DATA_NASC, EMAIL, NOME) VALUES(?, ?, ?, ?, ?)";
             PreparedStatement prepareStatement = database.getConnection().prepareStatement(sqlInsert);
-            prepareStatement.setInt(1, cliente.getIdfkResidencia());
+            prepareStatement.setInt(1, cliente.getEndereco().getResidencia().getIdResidencia());
             prepareStatement.setDate(2, cliente.getDataNascimento());
             prepareStatement.setString(3, cliente.getEmail());
             prepareStatement.setString(4, cliente.getNome());

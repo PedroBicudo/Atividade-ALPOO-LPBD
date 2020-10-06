@@ -6,6 +6,8 @@
 package SistemaLoja.database.conexao.select;
 
 import SistemaLoja.database.conexao.IBancoDao;
+import SistemaLoja.model.contato.Telefone;
+import SistemaLoja.model.contato.TelefoneCliente;
 import SistemaLoja.model.endereco.Bairro;
 import SistemaLoja.model.endereco.Cidade;
 import SistemaLoja.model.endereco.Estado;
@@ -31,6 +33,7 @@ public interface SelecionarDados {
     public Residencia selecionarResidenciaById(int residenciaId);
     public Produto selecionarProdutoById(int produtoId);
     public Cliente selecionarClienteById(int clienteId);
+    public ArrayList<TelefoneCliente> selecionarTelefonesByClienteId(int clienteId);
     public Venda selecionarUltimaCompraDoCliente(int clienteId);
     public ArrayList<Cliente> selecionarClientesSemEmail();
     public ArrayList<Produto> selecionarProdutosVencidos();
