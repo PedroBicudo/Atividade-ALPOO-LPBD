@@ -132,7 +132,7 @@ public class SQLServerSelect implements SelecionarDados {
                         new Rua(0, 0, clientes.getString("RUA")),
                         new Bairro(0, 0, clientes.getString("BAIRRO")),
                         new Cidade(0, 0, clientes.getString("CIDADE")),
-                        new Estado(0, clientes.getString("ESTADO"), clientes.getString("ESTADO_NOME"))
+                        new Estado(0, clientes.getString("ESTADO_SIGLA"), clientes.getString("ESTADO_NOME"))
                 );
                 Telefone telefoneCliente = database.getSelecionarActions().selecionarTelefoneByClienteId(clientes.getInt("ID_CLIENTE"));
                 
@@ -200,7 +200,7 @@ public class SQLServerSelect implements SelecionarDados {
     public ArrayList<Cliente> selecionarClientesSemEmail() {
         ArrayList<Cliente> clientesEncontrados = new ArrayList<>();
         try {
-            String sqlSelect = "SELECT ID_CLIENTE, NOME, DATA_NASC, IDFK_RESIDENCIA FROM CLIENTE WHERE EMAIL IS NULL";
+            String sqlSelect = "SELECT ID_CLIENTE, NOME, DATA_NASC, EMAIL, ID_RESIDENCIA, IDFK_RESIDENCIA, NUMERO_DA_CASA, DESCRICAO, RUA, BAIRRO, CIDADE, ESTADO_SIGLA, ESTADO_NOME FROM CLIENTE INNER JOIN ENDERECO ON CLIENTE.IDFK_RESIDENCIA = ENDERECO.ID_RESIDENCIA WHERE EMAIL IS NULL";
             PreparedStatement prepareStatement = database.getConnection().prepareStatement(sqlSelect);
             ResultSet clientes = prepareStatement.executeQuery();
             while (clientes.next()) {
@@ -209,7 +209,7 @@ public class SQLServerSelect implements SelecionarDados {
                         new Rua(0, 0, clientes.getString("RUA")),
                         new Bairro(0, 0, clientes.getString("BAIRRO")),
                         new Cidade(0, 0, clientes.getString("CIDADE")),
-                        new Estado(0, clientes.getString("ESTADO"), clientes.getString("ESTADO_NOME"))
+                        new Estado(0, clientes.getString("ESTADO_SIGLA"), clientes.getString("ESTADO_NOME"))
                 );
                 Telefone telefoneCliente = database.getSelecionarActions().selecionarTelefoneByClienteId(clientes.getInt("ID_CLIENTE"));
                 
@@ -256,7 +256,7 @@ public class SQLServerSelect implements SelecionarDados {
     public Cliente selecionarClienteById(int clienteId) {
         Cliente clienteEncontrado;
         try {
-            String sqlSelect = "SELECT ID_CLIENTE, NOME, DATA_NASC, EMAIL, IDFK_RESIDENCIA FROM CLIENTE WHERE ID_CLIENTE=?";
+            String sqlSelect = "SELECT ID_CLIENTE, NOME, DATA_NASC, EMAIL, ID_RESIDENCIA, IDFK_RESIDENCIA, NUMERO_DA_CASA, DESCRICAO, RUA, BAIRRO, CIDADE, ESTADO_SIGLA, ESTADO_NOME FROM CLIENTE INNER JOIN ENDERECO ON CLIENTE.IDFK_RESIDENCIA = ENDERECO.ID_RESIDENCIA WHERE ID_CLIENTE=?";
             PreparedStatement prepareStatement = database.getConnection().prepareStatement(sqlSelect);
             prepareStatement.setInt(1, clienteId);
             ResultSet clientes = prepareStatement.executeQuery();
@@ -266,7 +266,7 @@ public class SQLServerSelect implements SelecionarDados {
                 new Rua(0, 0, clientes.getString("RUA")),
                 new Bairro(0, 0, clientes.getString("BAIRRO")),
                 new Cidade(0, 0, clientes.getString("CIDADE")),
-                new Estado(0, clientes.getString("ESTADO"), clientes.getString("ESTADO_NOME"))
+                new Estado(0, clientes.getString("ESTADO_SIGLA"), clientes.getString("ESTADO_NOME"))
             );
             Telefone telefoneCliente = database.getSelecionarActions().selecionarTelefoneByClienteId(clientes.getInt("ID_CLIENTE"));
                 
@@ -402,7 +402,7 @@ public class SQLServerSelect implements SelecionarDados {
     
     public static void main(String[] args) {
         System.out.println(
-                SQLServerDao.getInstance().getSelecionarActions().selecionarClientesSemEmail().size()
+                SQLServerDao.getInstance().getSelecionarActions().selecionarClienteById(25).getTelefone().getTelefone()
         );
     }
 }
