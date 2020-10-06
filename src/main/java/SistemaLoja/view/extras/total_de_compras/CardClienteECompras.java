@@ -5,7 +5,6 @@
  */
 package SistemaLoja.view.extras.total_de_compras;
 
-import SistemaLoja.model.pessoa_fisica.ClienteComTelefoneEEndereco;
 import SistemaLoja.model.produtos.ClienteEVenda;
 
 /**
