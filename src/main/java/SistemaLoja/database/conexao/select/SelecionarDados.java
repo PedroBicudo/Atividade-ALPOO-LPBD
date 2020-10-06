@@ -32,7 +32,7 @@ public interface SelecionarDados {
     public Produto selecionarProdutoById(int produtoId);
     public Cliente selecionarClienteById(int clienteId);
     public Venda selecionarUltimaCompraDoCliente(int clienteId);
-    public ArrayList<Cliente> selecionarClientesSemAColunaEmail();
+    public ArrayList<Cliente> selecionarClientesSemEmail();
     public ArrayList<Produto> selecionarProdutosVencidos();
     public ArrayList<ClienteEVenda> selecionarVendasPorClienteEm2020();
 }

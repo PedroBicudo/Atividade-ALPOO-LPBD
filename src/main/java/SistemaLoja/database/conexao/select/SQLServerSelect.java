@@ -182,10 +182,10 @@ public class SQLServerSelect implements SelecionarDados {
     }
     
         @Override
-    public ArrayList<Cliente> selecionarClientesSemAColunaEmail() {
+    public ArrayList<Cliente> selecionarClientesSemEmail() {
         ArrayList<Cliente> clientesEncontrados = new ArrayList<>();
         try {
-            String sqlSelect = "SELECT ID_CLIENTE, NOME, DATA_NASC, IDFK_RESIDENCIA FROM CLIENTE";
+            String sqlSelect = "SELECT ID_CLIENTE, NOME, DATA_NASC, IDFK_RESIDENCIA FROM CLIENTE WHERE EMAIL IS NULL";
             PreparedStatement prepareStatement = database.getConnection().prepareStatement(sqlSelect);
             ResultSet clientes = prepareStatement.executeQuery();
             while (clientes.next()) {
