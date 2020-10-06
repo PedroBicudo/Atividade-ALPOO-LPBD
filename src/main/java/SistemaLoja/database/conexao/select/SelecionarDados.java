@@ -38,4 +38,5 @@ public interface SelecionarDados {
     public ArrayList<Cliente> selecionarClientesSemEmail();
     public ArrayList<Produto> selecionarProdutosVencidos();
     public ArrayList<ClienteEVenda> selecionarVendasPorClienteEm2020();
+    public float selecionarOValorTotalDeVendas();
 }
