@@ -6,6 +6,7 @@
 package SistemaLoja.view.principal;
 
 import SistemaLoja.view.compra.TelaDeCompraPanel;
+import SistemaLoja.view.extras.TelaDeExtras;
 import javax.swing.JFrame;
 
 /**
@@ -15,6 +16,7 @@ import javax.swing.JFrame;
 public class TelaPrincipal extends javax.swing.JFrame {
     
     private TelaDeCompraPanel telaDeCompra;
+    private TelaDeExtras telaDeExtras;
 
     /**
      * Creates new form TelaPrincipal
@@ -24,6 +26,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         initComponents();
         telaDeCompra = new TelaDeCompraPanel();
         telaDeCompra.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        telaDeExtras = new TelaDeExtras();
+        telaDeExtras.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
     
     /**
@@ -96,7 +100,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnComprarProdutoActionPerformed
 
     private void btnPainelExtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPainelExtrasActionPerformed
-        
+        if (!telaDeExtras.isVisible()) {
+            telaDeExtras.setVisible(true);
+        }
     }//GEN-LAST:event_btnPainelExtrasActionPerformed
 
     private void btnPainelCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPainelCadastroActionPerformed
