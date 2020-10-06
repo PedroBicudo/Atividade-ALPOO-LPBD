@@ -349,7 +349,7 @@ public class SQLServerSelect implements SelecionarDados {
     public ArrayList<Venda> selecionarVendas() {
         ArrayList<Venda> vendasEncontradas = new ArrayList<>();
         try {
-            String sqlSelect = "SELECT TOTAL, IDFK_CLIENTE FROM VENDA";
+            String sqlSelect = "SELECT ID_VENDA, TOTAL, DATA_HORA_VENDA, IDFK_CLIENTE FROM VENDA";
             PreparedStatement prepareStatement = database.getConnection().prepareStatement(sqlSelect);
             ResultSet vendas = prepareStatement.executeQuery();
             while (vendas.next()) {
@@ -404,4 +404,21 @@ public class SQLServerSelect implements SelecionarDados {
         return telefonesDoCliente;        
     }
 
+    @Override
+    public float selecionarOValorTotalDeVendas() {
+        float totalDeVendas = 0F;
+        try {
+            String sqlSelect = "SELECT SUM(TOTAL) AS TOTAL_DAS_VENDAS FROM VENDA";
+            PreparedStatement prepareStatement = database.getConnection().prepareStatement(sqlSelect);
+            ResultSet total = prepareStatement.executeQuery();
+            total.next();
+            totalDeVendas = total.getFloat("TOTAL_DAS_VENDAS");
+            
+        } catch (SQLException exception) {
+            System.out.println(exception.getMessage());
+        }        
+        
+        return totalDeVendas;        
+    }
+    
 }
