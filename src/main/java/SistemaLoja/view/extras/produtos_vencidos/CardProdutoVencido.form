@@ -36,7 +36,7 @@
               <EmptySpace pref="138" max="32767" attributes="0"/>
               <Component id="lbPreco" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-              <Component id="btnDiminuirQuantidade" min="-2" max="-2" attributes="0"/>
+              <Component id="btnDiminuirQuantidade" min="-2" pref="37" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="lbQuantia" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
