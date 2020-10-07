@@ -75,9 +75,9 @@ public class TelaDeCadastroDoCliente extends javax.swing.JPanel {
         txtFieldBairro = new javax.swing.JTextField();
         txtFieldRua = new javax.swing.JTextField();
         lbRuaText = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        lbNumeroResidenciaText = new javax.swing.JLabel();
         txtFieldNumeroResidencia = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
+        lbDescricaoResidenciaText = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaDescricaoResidencia = new javax.swing.JTextArea();
         lbRequiredNomeText = new javax.swing.JLabel();
@@ -115,7 +115,7 @@ public class TelaDeCadastroDoCliente extends javax.swing.JPanel {
 
         lbRuaText.setText("Rua");
 
-        jLabel7.setText("Número da casa");
+        lbNumeroResidenciaText.setText("Número da casa");
 
         txtFieldNumeroResidencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,7 +123,7 @@ public class TelaDeCadastroDoCliente extends javax.swing.JPanel {
             }
         });
 
-        jLabel8.setText("Descrição");
+        lbDescricaoResidenciaText.setText("Descrição");
 
         txtAreaDescricaoResidencia.setColumns(20);
         txtAreaDescricaoResidencia.setRows(5);
@@ -196,7 +196,7 @@ public class TelaDeCadastroDoCliente extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lbRequiredNomeText))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
+                        .addComponent(lbNumeroResidenciaText)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtFieldNumeroResidencia, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -221,7 +221,7 @@ public class TelaDeCadastroDoCliente extends javax.swing.JPanel {
                             .addComponent(lbRequiredCidadeText)
                             .addComponent(lbRequiredBairroText)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8)
+                        .addComponent(lbDescricaoResidenciaText)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -318,13 +318,13 @@ public class TelaDeCadastroDoCliente extends javax.swing.JPanel {
                             .addComponent(lbRequiredRuaText))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
+                            .addComponent(lbNumeroResidenciaText)
                             .addComponent(txtFieldNumeroResidencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbRequiredNumeroText))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8))
+                            .addComponent(lbDescricaoResidenciaText))
                         .addGap(70, 85, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -482,17 +482,17 @@ public class TelaDeCadastroDoCliente extends javax.swing.JPanel {
     private javax.swing.JButton btnConcluirCadastro;
     private javax.swing.JComboBox<String> comboBoxEstados;
     private javax.swing.JFormattedTextField formattxtFieldDataNascimento;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lbBairroText;
     private javax.swing.JLabel lbCidadeText;
     private javax.swing.JLabel lbDataNascimentoText;
+    private javax.swing.JLabel lbDescricaoResidenciaText;
     private javax.swing.JLabel lbEmailText;
     private javax.swing.JLabel lbEnderecoText;
     private javax.swing.JLabel lbEstadoText;
     private javax.swing.JLabel lbNomeText;
+    private javax.swing.JLabel lbNumeroResidenciaText;
     private javax.swing.JLabel lbRequiredBairroText;
     private javax.swing.JLabel lbRequiredCidadeText;
     private javax.swing.JLabel lbRequiredDataNascimentoText;
