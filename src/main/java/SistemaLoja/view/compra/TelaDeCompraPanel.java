@@ -173,10 +173,8 @@ public class TelaDeCompraPanel extends javax.swing.JFrame implements ProdutosCom
         if (produtosCompradosPeloCliente.size() > 0) {
             calcularTotalDaCompra(produtosCompradosPeloCliente);
             Venda compraDoCliente = new Venda(0, clienteDaSessao.getIdCliente(), null, totalDaCompra);
-            database.getInserirActions().inserirVenda(compraDoCliente);
 
-            Venda ultimaVendaParaOCliente = database.getSelecionarActions().selecionarUltimaCompraDoCliente(clienteDaSessao.getIdCliente());                    
-            database.getProdutoActions().efetuarCompraDeProdutos(ultimaVendaParaOCliente, produtosCompradosPeloCliente);
+            database.getProdutoActions().efetuarCompraDeProdutos(compraDoCliente, produtosCompradosPeloCliente);
             popularListaDeProdutos();
             totalDaCompra = 0F;
         } else {
