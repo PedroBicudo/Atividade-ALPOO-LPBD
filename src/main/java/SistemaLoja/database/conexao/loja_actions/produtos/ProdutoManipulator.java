@@ -6,6 +6,7 @@
 package SistemaLoja.database.conexao.loja_actions.produtos;
 
 import SistemaLoja.database.conexao.IBancoDao;
+import SistemaLoja.database.conexao.SQLServerDao;
 import SistemaLoja.model.produtos.ItemVenda;
 import SistemaLoja.model.produtos.ProdutoComprado;
 import SistemaLoja.model.produtos.Venda;
@@ -32,7 +33,8 @@ public class ProdutoManipulator implements ProdutoActions {
     
     @Override
     public void efetuarCompraDeProdutos(Venda venda, ArrayList<ProdutoComprado> produtosComprados) {
-        database.getInserirActions().inserirVenda(venda);
+        int idVenda = database.getInserirActions().inserirVenda(venda);
+        venda.setIdVenda(idVenda);
         for (ProdutoComprado produtoComprado: produtosComprados) {
             boolean isCompraDoProdutoEfetuada = efetuarCompraDoProduto(venda, produtoComprado);
             if (!isCompraDoProdutoEfetuada) {
