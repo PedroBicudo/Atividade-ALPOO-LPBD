@@ -5,6 +5,9 @@
  */
 package SistemaLoja.model.produtos;
 
+import SistemaLoja.model.contato.TelefoneDistribuidor;
+import java.util.ArrayList;
+
 /**
  *
  * @author pedroh
@@ -14,6 +17,7 @@ public class Distribuidor {
     private String nomeFantasia;
     private String razaoSocial;
     private String email;
+    private ArrayList<TelefoneDistribuidor> telefones;
 
     public int getIdDistribuidor() {
         return idDistribuidor;
@@ -47,11 +51,20 @@ public class Distribuidor {
         this.email = email;
     }
 
-    public Distribuidor(int idDistribuidor, String nomeFantasia, String razaoSocial, String email) {
-        this.setIdDistribuidor(idDistribuidor);
-        this.setNomeFantasia(nomeFantasia);
-        this.setRazaoSocial(razaoSocial);
-        this.setEmail(email);
+    public ArrayList<TelefoneDistribuidor> getTelefones() {
+        return telefones;
     }
-    
+
+    public void setTelefones(ArrayList<TelefoneDistribuidor> telefones) {
+        this.telefones = telefones;
+    }
+
+    public Distribuidor(int idDistribuidor, String nomeFantasia, String razaoSocial, String email, ArrayList<TelefoneDistribuidor> telefones) {
+        this.idDistribuidor = idDistribuidor;
+        this.nomeFantasia = nomeFantasia;
+        this.razaoSocial = razaoSocial;
+        this.email = email;
+        this.telefones = telefones;
+    }
+
 }
