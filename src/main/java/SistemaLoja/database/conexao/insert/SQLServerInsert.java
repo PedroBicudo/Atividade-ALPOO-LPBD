@@ -82,8 +82,9 @@ public class SQLServerInsert implements InserirDados {
             prepareStatement.setString(1, distribuidor.getNomeFantasia());
             prepareStatement.setString(2, distribuidor.getRazaoSocial());
             prepareStatement.setString(3, distribuidor.getEmail());
-            int idDistribuidorCriado = prepareStatement.executeQuery().getInt("ID_DISTRIBUIDOR_CRIADO");
-            boolean isTelefonesInseridos = inserirTelefonesDistribuidor(idDistribuidorCriado, distribuidor.getTelefones());
+            ResultSet idDistribuidorCriado = prepareStatement.executeQuery();
+            idDistribuidorCriado.next();
+            boolean isTelefonesInseridos = inserirTelefonesDistribuidor(idDistribuidorCriado.getInt("ID_DISTRIBUIDOR_CRIADO"), distribuidor.getTelefones());
             
             return isTelefonesInseridos;
         
@@ -138,9 +139,10 @@ public class SQLServerInsert implements InserirDados {
             PreparedStatement prepareStatement = database.getConnection().prepareStatement(sqlInsert);
             prepareStatement.setFloat(1, venda.getTotal());
             prepareStatement.setInt(2, venda.getIdfkCliente());
-            int idVendaCriada = prepareStatement.executeQuery().getInt("ID_VENDA_CRIADA");
+            ResultSet idVendaCriada = prepareStatement.executeQuery();
+            idVendaCriada.next();
             
-            return idVendaCriada;
+            return idVendaCriada.getInt("ID_VENDA_CRIADA");
         
         } catch (SQLException exception) {
             
