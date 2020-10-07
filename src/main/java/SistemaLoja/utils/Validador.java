@@ -16,22 +16,27 @@ public class Validador {
     }
     
     public static boolean isIdValido(String id) {
-        if (id == null) {
-            return false;
-        }
-        
+        return Validador.isNumero(id);
+    }
+    
+    public static boolean isNumero(String text) {
         try {
-            Integer.parseInt(id);
+            Integer.parseInt(text);
             return true;
         
         } catch (NumberFormatException exception) {
             return false;
         }
-        
     }
     
-    public static boolean isQuantidadeValida(int quantidade, int totalEstoque) {
-        return quantidade > 0 && quantidade <= totalEstoque ;
+    public static boolean isTextoVazio(String text) {
+        return text.trim().isEmpty();
     }
-
+    
+    public static boolean isTelefoneValido(String telefone) {
+        return 
+                telefone.trim().length() >= 8 && telefone.trim().length() <= 11 &&
+                Validador.isNumero(telefone);
+    }
+    
 }
