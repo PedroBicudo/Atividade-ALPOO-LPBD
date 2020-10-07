@@ -186,26 +186,5 @@ public class SQLServerInsert implements InserirDados {
             
             return false;
         }
-    }
-    
-    
-    public static void main(String[] args) {
-        Estado e = new Estado(0, "AA", "AAAAAA");
-        Cidade c= new Cidade(0, 0, "AAAAAAA");
-        Bairro b = new Bairro(0, 0, "POPOPOP");
-        Rua r = new Rua(0, 0, "POPOAPSDOAPDOPASODAP");
-        Residencia rd = new Residencia(0, 0, 123, "nada");
-        Endereco ed = new Endereco(rd, r, b, c, e);
-        ArrayList<TelefoneCliente> telefones = new ArrayList<TelefoneCliente>();
-        telefones.add(new TelefoneCliente(0, 0, "123-123-123"));
-        telefones.add(new TelefoneCliente(0, 0, "222-333-444"));
-        telefones.add(new TelefoneCliente(0, 0, "123-123-555"));
-        telefones.add(new TelefoneCliente(0, 0, "123-123-666"));
-        
-        
-        Cliente cl = new Cliente(0, "POKOIO", new Date(2012, 12, 12), "teste@gmail.com", ed, telefones);
-        
-        System.out.println(SQLServerDao.getInstance().getInserirActions().inserirCliente(cl));
-    }
-    
+    }  
 }
