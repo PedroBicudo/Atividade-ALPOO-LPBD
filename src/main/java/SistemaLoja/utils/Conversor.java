@@ -6,6 +6,7 @@
 package SistemaLoja.utils;
 
 import java.sql.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 /**
@@ -17,5 +18,17 @@ public class Conversor {
     public static String dateToString(Date date) {
         SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy");
         return dataFormatada.format(date);
+    }
+    
+    public static Date StringParaData(String valor) {
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            return new Date(format.parse(valor).getTime());
+            
+        } catch (ParseException exception) {
+            
+            return null;
+        }
+
     }
 }
