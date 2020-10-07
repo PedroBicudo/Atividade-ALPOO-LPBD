@@ -70,7 +70,7 @@ public class Cliente {
     public void setTelefones(ArrayList<TelefoneCliente> telefones) {
         this.telefones = telefones;
     }
-    
+
     public Cliente(int idCliente, String nome, Date dataNascimento, String email, Endereco endereco, ArrayList<TelefoneCliente> telefones) {
         setIdCliente(idCliente);
         setNome(nome);

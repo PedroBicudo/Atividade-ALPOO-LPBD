@@ -290,33 +290,7 @@ public class SQLServerSelect implements SelecionarDados {
         
         return clienteEncontrado;
     }
-
-    @Override
-    public Venda selecionarUltimaCompraDoCliente(int clienteId) {
-        Venda ultimaVendaFeitaParaOCliente;
-        try {
-            String sqlSelect = "SELECT ID_VENDA, DATA_HORA_VENDA, TOTAL, IDFK_CLIENTE FROM VENDA WHERE DATA_HORA_VENDA = (SELECT MAX(DATA_HORA_VENDA) FROM VENDA WHERE IDFK_CLIENTE=?) AND IDFK_CLIENTE=?";
-            PreparedStatement prepareStatement = database.getConnection().prepareStatement(sqlSelect);
-            prepareStatement.setInt(1, clienteId);
-            prepareStatement.setInt(2, clienteId);
-            ResultSet ultimaVenda = prepareStatement.executeQuery();
-            ultimaVenda.next();
-            ultimaVendaFeitaParaOCliente = 
-                    new Venda(
-                            ultimaVenda.getInt("ID_VENDA"), 
-                            ultimaVenda.getInt("IDFK_CLIENTE"), 
-                            ultimaVenda.getDate("DATA_HORA_VENDA"), 
-                            ultimaVenda.getFloat("TOTAL")
-                    );
-            
-        } catch (SQLException exception) {
-            System.out.println(exception.getMessage());
-            ultimaVendaFeitaParaOCliente = null;
-        }        
-        
-        return ultimaVendaFeitaParaOCliente;
-    }
-    
+  
     public int getTotalDeComprasDoClienteEm2020(Cliente cliente) {
         int totalDeVendasParaOClienteEm2020 = 0;
         try {
