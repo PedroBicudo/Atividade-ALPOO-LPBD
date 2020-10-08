@@ -5,6 +5,7 @@
  */
 package SistemaLoja.view.principal;
 
+import SistemaLoja.view.atualizacao.TelaDeOpcoesDeAtualizacao;
 import SistemaLoja.view.cadastro.TelaDeOpcoesDeCadastro;
 import SistemaLoja.view.compra.TelaDeCompraPanel;
 import SistemaLoja.view.extras.TelaDeExtras;
@@ -18,6 +19,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     
     private TelaDeCompraPanel telaDeCompra;
     private TelaDeOpcoesDeCadastro telaDeOpcoesDeCadastro;
+    private TelaDeOpcoesDeAtualizacao telaDeOpcoesDeAtualizacao;
     private TelaDeExtras telaDeExtras;
 
     /**
@@ -32,6 +34,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         telaDeExtras.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         telaDeOpcoesDeCadastro = new TelaDeOpcoesDeCadastro();
         telaDeOpcoesDeCadastro.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        telaDeOpcoesDeAtualizacao = new TelaDeOpcoesDeAtualizacao();
+        telaDeOpcoesDeAtualizacao.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
     
     /**
@@ -46,6 +50,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnComprarProduto = new javax.swing.JButton();
         btnPainelExtras = new javax.swing.JButton();
         btnPainelCadastro = new javax.swing.JButton();
+        btnAtualizarDados = new javax.swing.JButton();
+        btnExcluirDados = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,28 +76,49 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnAtualizarDados.setText("Abrir painel de Atualização");
+        btnAtualizarDados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarDadosActionPerformed(evt);
+            }
+        });
+
+        btnExcluirDados.setText("Abrir painel de exclusão");
+        btnExcluirDados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirDadosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(97, 97, 97)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnPainelCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                    .addComponent(btnPainelExtras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnComprarProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(102, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(109, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnExcluirDados, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAtualizarDados, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnPainelCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnPainelExtras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnComprarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(90, 90, 90))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(70, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
+                .addComponent(btnExcluirDados, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addComponent(btnAtualizarDados, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnComprarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnPainelCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnPainelExtras, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
@@ -115,6 +142,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
             telaDeOpcoesDeCadastro.setVisible(true);
         }
     }//GEN-LAST:event_btnPainelCadastroActionPerformed
+
+    private void btnAtualizarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarDadosActionPerformed
+        // TODO add your handling code here:
+        if (!telaDeOpcoesDeAtualizacao.isVisible()) {
+            telaDeOpcoesDeAtualizacao.setVisible(true);
+        }
+    }//GEN-LAST:event_btnAtualizarDadosActionPerformed
+
+    private void btnExcluirDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirDadosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnExcluirDadosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -152,7 +190,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtualizarDados;
     private javax.swing.JButton btnComprarProduto;
+    private javax.swing.JButton btnExcluirDados;
     private javax.swing.JButton btnPainelCadastro;
     private javax.swing.JButton btnPainelExtras;
     // End of variables declaration//GEN-END:variables
