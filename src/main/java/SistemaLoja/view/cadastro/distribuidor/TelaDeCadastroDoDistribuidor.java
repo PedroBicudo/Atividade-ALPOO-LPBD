@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class TelaDeCadastroDoDistribuidor extends javax.swing.JPanel {
     
     private IBancoDao database;
-    private Distribuidor distribuidor;
+    private Distribuidor distribuidorCadastrador;
             
     /**
      * Creates new form TelaDeCadastroDoDistribuidor
@@ -46,8 +46,6 @@ public class TelaDeCadastroDoDistribuidor extends javax.swing.JPanel {
         lbEmailText = new javax.swing.JLabel();
         txtFieldNomeFantasia = new javax.swing.JTextField();
         txtFieldRazaoSocial = new javax.swing.JTextField();
-        txtFieldTelefonePrimeiro = new javax.swing.JTextField();
-        txtFieldTelefoneSegundo = new javax.swing.JTextField();
         txtFieldEmail = new javax.swing.JTextField();
         btnCadastrarDistribuidor = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -55,6 +53,8 @@ public class TelaDeCadastroDoDistribuidor extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        formatTxtFieldTelefonePrimeiro = new javax.swing.JFormattedTextField();
+        formatTxtFieldTelefoneSegundo = new javax.swing.JFormattedTextField();
 
         lbNomeFantasiaText.setText("Nome fantasia");
 
@@ -88,6 +88,15 @@ public class TelaDeCadastroDoDistribuidor extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(255, 51, 51));
         jLabel5.setText("Obrigatório");
 
+        formatTxtFieldTelefonePrimeiro.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+
+        formatTxtFieldTelefoneSegundo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        formatTxtFieldTelefoneSegundo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                formatTxtFieldTelefoneSegundoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,9 +114,10 @@ public class TelaDeCadastroDoDistribuidor extends javax.swing.JPanel {
                                 .addComponent(lbRazaoSocialText))
                             .addGap(20, 20, 20)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbSegundoTelefoneText)
-                        .addGap(23, 23, 23))
-                    .addComponent(lbEmailText))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbSegundoTelefoneText)
+                            .addComponent(lbEmailText))
+                        .addGap(23, 23, 23)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -120,18 +130,17 @@ public class TelaDeCadastroDoDistribuidor extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txtFieldEmail, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(txtFieldTelefonePrimeiro, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel3))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(txtFieldTelefoneSegundo, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel4))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(formatTxtFieldTelefoneSegundo, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                                    .addComponent(formatTxtFieldTelefonePrimeiro))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel5)))
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addContainerGap(119, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCadastrarDistribuidor, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -146,20 +155,21 @@ public class TelaDeCadastroDoDistribuidor extends javax.swing.JPanel {
                     .addComponent(txtFieldNomeFantasia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbRazaoSocialText)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtFieldRazaoSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lbRazaoSocialText)
+                        .addComponent(jLabel2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbPrimeiroTelefoneText)
-                    .addComponent(txtFieldTelefonePrimeiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(formatTxtFieldTelefonePrimeiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbSegundoTelefoneText)
-                    .addComponent(txtFieldTelefoneSegundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(formatTxtFieldTelefoneSegundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbEmailText)
@@ -175,8 +185,8 @@ public class TelaDeCadastroDoDistribuidor extends javax.swing.JPanel {
                 Validador.isTextoVazio(txtFieldNomeFantasia.getText()) ||
                 Validador.isTextoVazio(txtFieldRazaoSocial.getText()) ||
                 Validador.isTextoVazio(txtFieldEmail.getText()) ||
-                Validador.isTextoVazio(txtFieldTelefonePrimeiro.getText()) ||
-                Validador.isTextoVazio(txtFieldTelefoneSegundo.getText());
+                Validador.isTextoVazio(formatTxtFieldTelefonePrimeiro.getText()) ||
+                Validador.isTextoVazio(formatTxtFieldTelefoneSegundo.getText());
     }
     
     private boolean isNomeValido(String nome) {
@@ -196,11 +206,11 @@ public class TelaDeCadastroDoDistribuidor extends javax.swing.JPanel {
     }
     
     private boolean isPrimeiroTelefoneValido() {
-        return Validador.isTelefoneValido(txtFieldTelefonePrimeiro.getText());
+        return Validador.isTelefoneValido(formatTxtFieldTelefonePrimeiro.getText());
     }
     
     private boolean isSegundoTelefoneValido() {
-        return Validador.isTelefoneValido(txtFieldTelefoneSegundo.getText());    
+        return Validador.isTelefoneValido(formatTxtFieldTelefoneSegundo.getText());    
     }
     
     private boolean isCamposDeContatoValidos() {
@@ -245,21 +255,21 @@ public class TelaDeCadastroDoDistribuidor extends javax.swing.JPanel {
     
     private ArrayList<TelefoneDistribuidor> obterTelefonesDoDistribuidor() {
         ArrayList<TelefoneDistribuidor> telefones = new ArrayList<>();
-        telefones.add(new TelefoneDistribuidor(0, 0, txtFieldTelefonePrimeiro.getText()));
-        telefones.add(new TelefoneDistribuidor(0, 0, txtFieldTelefoneSegundo.getText()));
+        telefones.add(new TelefoneDistribuidor(0, 0, formatTxtFieldTelefonePrimeiro.getText()));
+        telefones.add(new TelefoneDistribuidor(0, 0, formatTxtFieldTelefoneSegundo.getText()));
         
         return telefones;
     }
     
     private void cadastrarDistribuidor() {
-        distribuidor = new Distribuidor(
+        distribuidorCadastrador = new Distribuidor(
                 0,
                 txtFieldNomeFantasia.getText(), 
                 txtFieldRazaoSocial.getText(), 
                 txtFieldEmail.getText(), 
                 obterTelefonesDoDistribuidor());
         
-        boolean isDistribuidorCadastrado = database.getInserirActions().inserirDistribuidor(distribuidor);
+        boolean isDistribuidorCadastrado = database.getInserirActions().inserirDistribuidor(distribuidorCadastrador);
         if (isDistribuidorCadastrado) {
             Mensagem.mostrarSucesso("Distribuidor cadastrado com sucesso.");
         } else {
@@ -274,9 +284,15 @@ public class TelaDeCadastroDoDistribuidor extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnCadastrarDistribuidorActionPerformed
 
+    private void formatTxtFieldTelefoneSegundoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formatTxtFieldTelefoneSegundoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formatTxtFieldTelefoneSegundoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrarDistribuidor;
+    private javax.swing.JFormattedTextField formatTxtFieldTelefonePrimeiro;
+    private javax.swing.JFormattedTextField formatTxtFieldTelefoneSegundo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -290,7 +306,5 @@ public class TelaDeCadastroDoDistribuidor extends javax.swing.JPanel {
     private javax.swing.JTextField txtFieldEmail;
     private javax.swing.JTextField txtFieldNomeFantasia;
     private javax.swing.JTextField txtFieldRazaoSocial;
-    private javax.swing.JTextField txtFieldTelefonePrimeiro;
-    private javax.swing.JTextField txtFieldTelefoneSegundo;
     // End of variables declaration//GEN-END:variables
 }
