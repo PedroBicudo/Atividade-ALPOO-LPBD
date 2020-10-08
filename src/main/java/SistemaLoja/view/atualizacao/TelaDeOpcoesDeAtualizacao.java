@@ -6,6 +6,7 @@
 package SistemaLoja.view.atualizacao;
 
 import SistemaLoja.view.atualizacao.cliente.TelaDeAtualizacaoDoCliente;
+import SistemaLoja.view.atualizacao.produto.TelaDeAtualizacaoDoProduto;
 
 /**
  *
@@ -14,6 +15,7 @@ import SistemaLoja.view.atualizacao.cliente.TelaDeAtualizacaoDoCliente;
 public class TelaDeOpcoesDeAtualizacao extends javax.swing.JFrame {
     
     private TelaDeAtualizacaoDoCliente telaDeAtualizacaoDoCliente;
+    private TelaDeAtualizacaoDoProduto telaDeAtualizacaoDoProduto;
 
     /**
      * Creates new form TelaDeOpcoesDeAtualizacao
@@ -22,6 +24,8 @@ public class TelaDeOpcoesDeAtualizacao extends javax.swing.JFrame {
         initComponents();
         telaDeAtualizacaoDoCliente = new TelaDeAtualizacaoDoCliente();
         scrollPaneCliente.setViewportView(telaDeAtualizacaoDoCliente);
+        telaDeAtualizacaoDoProduto = new TelaDeAtualizacaoDoProduto();
+        scrollPaneProduto.setViewportView(telaDeAtualizacaoDoProduto);
     }
 
     /**

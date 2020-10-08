@@ -19,40 +19,7 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lbProdutoText" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="lbPrecoVendaText" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="formatTxtFieldPrecoVenda" min="-2" pref="166" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lbPrecoCompraText" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lbValidadeText" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lbEstoque" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="formatTxtFieldValidade" max="32767" attributes="0"/>
-                                  <Component id="formatTxtFieldPrecoCompra" pref="166" max="32767" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="formatTxtFieldEstoque" min="-2" pref="70" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="lbObrigatorioEstoqueText1" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lbObrigatorioValidadeText" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbObrigatorioPrecoCompraText" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbObrigatorioPrecoVendaText" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lbDistribuidorText" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lbDescricaoText" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -68,12 +35,47 @@
                           <Component id="lbObrigatorioDistribuidorText" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lbPrecoVendaText" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="formatTxtFieldPrecoVenda" min="-2" pref="166" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lbPrecoCompraText" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbValidadeText" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbEstoque" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbProdutoText" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="formatTxtFieldValidade" max="32767" attributes="0"/>
+                                  <Component id="formatTxtFieldPrecoCompra" pref="166" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="formatTxtFieldEstoque" min="-2" pref="70" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="lbObrigatorioEstoqueText1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="comboBoxProdutos" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lbObrigatorioValidadeText" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbObrigatorioPrecoCompraText" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbObrigatorioPrecoVendaText" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnMostrarProduto" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
-              <EmptySpace pref="175" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="btnConcluirCadastro" min="-2" pref="160" max="-2" attributes="0"/>
+              <EmptySpace pref="319" max="32767" attributes="0"/>
+              <Component id="btnConcluirAtualizacao" min="-2" pref="160" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -81,8 +83,12 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-              <Component id="lbProdutoText" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lbProdutoText" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="comboBoxProdutos" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnMostrarProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lbEstoque" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -112,12 +118,12 @@
                   <Group type="102" attributes="0">
                       <Component id="lbDescricaoText" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lbDistribuidorText" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                               <Component id="comboBoxDistribuidor" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lbObrigatorioDistribuidorText" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="lbDistribuidorText" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -125,8 +131,8 @@
                       <Component id="lbObrigatorioDescricaoText" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="84" max="32767" attributes="0"/>
-              <Component id="btnConcluirCadastro" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="78" max="32767" attributes="0"/>
+              <Component id="btnConcluirAtualizacao" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -208,12 +214,12 @@
         <Property name="text" type="java.lang.String" value="Data de validade"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnConcluirCadastro">
+    <Component class="javax.swing.JButton" name="btnConcluirAtualizacao">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Concluir cadastro"/>
+        <Property name="text" type="java.lang.String" value="Concluir Atualiza&#xe7;&#xe3;o"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConcluirCadastroActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConcluirAtualizacaoActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lbObrigatorioValidadeText">
@@ -275,6 +281,27 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Obrigat&#xf3;rio"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="comboBoxProdutos">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboBoxProdutosActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnMostrarProduto">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Mostrar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMostrarProdutoActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
