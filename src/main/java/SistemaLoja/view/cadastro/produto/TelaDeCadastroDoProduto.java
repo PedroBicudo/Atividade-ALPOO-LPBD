@@ -36,6 +36,7 @@ public class TelaDeCadastroDoProduto extends javax.swing.JPanel {
     }
     
     private void adicionarDistribuidoresAoComboBox() {
+        comboBoxDistribuidor.removeAllItems();
         for (Distribuidor distribuidor: distribuidoresDisponiveis) {
             comboBoxDistribuidor.addItem(distribuidor.getNomeFantasia());
         }
@@ -70,6 +71,7 @@ public class TelaDeCadastroDoProduto extends javax.swing.JPanel {
         lbEstoque = new javax.swing.JLabel();
         formatTxtFieldEstoque = new javax.swing.JFormattedTextField();
         lbObrigatorioEstoqueText1 = new javax.swing.JLabel();
+        btnAtualizarListaDeDistribuidores = new javax.swing.JButton();
 
         lbDistribuidorText.setText("Distribuidor");
 
@@ -139,6 +141,13 @@ public class TelaDeCadastroDoProduto extends javax.swing.JPanel {
         lbObrigatorioEstoqueText1.setForeground(new java.awt.Color(255, 51, 51));
         lbObrigatorioEstoqueText1.setText("Obrigatório");
 
+        btnAtualizarListaDeDistribuidores.setText("Tem novos distribuidores?");
+        btnAtualizarListaDeDistribuidores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarListaDeDistribuidoresActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -186,6 +195,8 @@ public class TelaDeCadastroDoProduto extends javax.swing.JPanel {
                 .addContainerGap(175, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAtualizarListaDeDistribuidores, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(129, 129, 129)
                 .addComponent(btnConcluirCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35))
         );
@@ -219,16 +230,18 @@ public class TelaDeCadastroDoProduto extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lbDescricaoText)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbDistribuidorText)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(comboBoxDistribuidor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lbObrigatorioDistribuidorText))))
+                                .addComponent(lbObrigatorioDistribuidorText))
+                            .addComponent(lbDistribuidorText)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtFieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lbObrigatorioDescricaoText)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                .addComponent(btnConcluirCadastro)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnConcluirCadastro)
+                    .addComponent(btnAtualizarListaDeDistribuidores))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -362,13 +375,35 @@ public class TelaDeCadastroDoProduto extends javax.swing.JPanel {
 
     private void btnConcluirCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConcluirCadastroActionPerformed
         // TODO add your handling code here:
+        if (distribuidoresDisponiveis.size() < 1) {
+            Mensagem.mostrarErro("Não existem distribuidores cadastrados.");
+            return;
+        }
+        
         if (isTodosOsCamposObrigatoriosValidos()) {
             cadastrarProduto();
         }
     }//GEN-LAST:event_btnConcluirCadastroActionPerformed
 
+    private void btnAtualizarListaDeDistribuidoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarListaDeDistribuidoresActionPerformed
+        // TODO add your handling code here:
+        int tamanhoAntigo = distribuidoresDisponiveis.size();
+        distribuidoresDisponiveis = database.getSelecionarActions().selecionarDistribuidores();
+        adicionarDistribuidoresAoComboBox();
+        int tamanhoNovo = distribuidoresDisponiveis.size();
+        int quantidadeNovosDistribuidores = tamanhoNovo - tamanhoAntigo;
+        if (quantidadeNovosDistribuidores < 0) {
+            Mensagem.mostrarSucesso(Math.abs(quantidadeNovosDistribuidores)+" foram removidos.");
+        } else if (quantidadeNovosDistribuidores > 0) {
+            Mensagem.mostrarSucesso(Math.abs(quantidadeNovosDistribuidores)+" foram adicionados.");        
+        } else {
+            Mensagem.mostrarSucesso("Nenhuma alteração.");
+        }        
+    }//GEN-LAST:event_btnAtualizarListaDeDistribuidoresActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtualizarListaDeDistribuidores;
     private javax.swing.JButton btnConcluirCadastro;
     private javax.swing.JComboBox<String> comboBoxDistribuidor;
     private javax.swing.JFormattedTextField formatTxtFieldEstoque;
