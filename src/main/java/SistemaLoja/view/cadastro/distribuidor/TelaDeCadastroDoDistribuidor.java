@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class TelaDeCadastroDoDistribuidor extends javax.swing.JPanel {
     
     private IBancoDao database;
-    private Distribuidor distribuidorCadastrador;
+    private Distribuidor distribuidorCadastrado;
             
     /**
      * Creates new form TelaDeCadastroDoDistribuidor
@@ -262,14 +262,14 @@ public class TelaDeCadastroDoDistribuidor extends javax.swing.JPanel {
     }
     
     private void cadastrarDistribuidor() {
-        distribuidorCadastrador = new Distribuidor(
+        distribuidorCadastrado = new Distribuidor(
                 0,
                 txtFieldNomeFantasia.getText(), 
                 txtFieldRazaoSocial.getText(), 
                 txtFieldEmail.getText(), 
                 obterTelefonesDoDistribuidor());
         
-        boolean isDistribuidorCadastrado = database.getInserirActions().inserirDistribuidor(distribuidorCadastrador);
+        boolean isDistribuidorCadastrado = database.getInserirActions().inserirDistribuidor(distribuidorCadastrado);
         if (isDistribuidorCadastrado) {
             Mensagem.mostrarSucesso("Distribuidor cadastrado com sucesso.");
         } else {
