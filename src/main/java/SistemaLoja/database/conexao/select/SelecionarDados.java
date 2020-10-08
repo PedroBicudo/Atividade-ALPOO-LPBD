@@ -8,12 +8,14 @@ package SistemaLoja.database.conexao.select;
 import SistemaLoja.database.conexao.IBancoDao;
 import SistemaLoja.model.contato.Telefone;
 import SistemaLoja.model.contato.TelefoneCliente;
+import SistemaLoja.model.contato.TelefoneDistribuidor;
 import SistemaLoja.model.endereco.Bairro;
 import SistemaLoja.model.endereco.Cidade;
 import SistemaLoja.model.endereco.Estado;
 import SistemaLoja.model.endereco.Residencia;
 import SistemaLoja.model.pessoa_fisica.Cliente;
 import SistemaLoja.model.produtos.ClienteEVenda;
+import SistemaLoja.model.produtos.Distribuidor;
 import SistemaLoja.model.produtos.Produto;
 import SistemaLoja.model.produtos.Venda;
 import java.util.ArrayList;
@@ -34,8 +36,11 @@ public interface SelecionarDados {
     public Produto selecionarProdutoById(int produtoId);
     public Cliente selecionarClienteById(int clienteId);
     public ArrayList<TelefoneCliente> selecionarTelefonesByClienteId(int clienteId);
+    public ArrayList<TelefoneDistribuidor> selecionarTelefonesByDistribuidorId(int distribuidorId);
     public ArrayList<Cliente> selecionarClientesSemEmail();
     public ArrayList<Produto> selecionarProdutosVencidos();
     public ArrayList<ClienteEVenda> selecionarVendasPorClienteEm2020();
+    public ArrayList<Distribuidor> selecionarDistribuidores();
     public float selecionarOValorTotalDeVendas();
+    
 }
