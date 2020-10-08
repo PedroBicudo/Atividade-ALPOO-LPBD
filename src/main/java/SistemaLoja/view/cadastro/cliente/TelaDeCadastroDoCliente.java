@@ -47,7 +47,7 @@ public class TelaDeCadastroDoCliente extends javax.swing.JPanel {
         adicionarEstadosAoComboBox();
     }
     
-    public void adicionarEstadosAoComboBox() {
+    private void adicionarEstadosAoComboBox() {
         for (Estado estado: estadosDisponiveis) {
             comboBoxEstados.addItem(estado.getNome());
         }
@@ -96,6 +96,7 @@ public class TelaDeCadastroDoCliente extends javax.swing.JPanel {
         formatTxtFieldTelefonePrimeiro = new javax.swing.JFormattedTextField();
         formatTxtFieldNumeroResidencia = new javax.swing.JFormattedTextField();
         formatTxtFieldTelefoneSegundo = new javax.swing.JFormattedTextField();
+        lbRequiredTelefoneSegundoText = new javax.swing.JLabel();
 
         lbNomeText.setText("Nome");
 
@@ -191,6 +192,9 @@ public class TelaDeCadastroDoCliente extends javax.swing.JPanel {
             }
         });
 
+        lbRequiredTelefoneSegundoText.setForeground(new java.awt.Color(255, 51, 51));
+        lbRequiredTelefoneSegundoText.setText("(Obrigatório)");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -221,7 +225,10 @@ public class TelaDeCadastroDoCliente extends javax.swing.JPanel {
                                         .addComponent(formatTxtFieldTelefonePrimeiro, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(lbRequiredTelefonePrimeiroText))
-                                    .addComponent(formatTxtFieldTelefoneSegundo, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(formatTxtFieldTelefoneSegundo, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lbRequiredTelefoneSegundoText)))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
@@ -301,7 +308,8 @@ public class TelaDeCadastroDoCliente extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbTelefoneSegundoText)
-                    .addComponent(formatTxtFieldTelefoneSegundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(formatTxtFieldTelefoneSegundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbRequiredTelefoneSegundoText))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -349,6 +357,7 @@ public class TelaDeCadastroDoCliente extends javax.swing.JPanel {
                 Validador.isTextoVazio(txtFieldNomeCliente.getText()) ||
                 Validador.isTextoVazio(formattxtFieldDataNascimento.getText()) ||
                 Validador.isTextoVazio(formatTxtFieldTelefonePrimeiro.getText()) ||
+                Validador.isTextoVazio(formatTxtFieldTelefoneSegundo.getText()) ||
                 Validador.isTextoVazio(txtFieldCidade.getText()) ||
                 Validador.isTextoVazio(txtFieldBairro.getText()) ||
                 Validador.isTextoVazio(txtFieldRua.getText()) ||
@@ -362,6 +371,7 @@ public class TelaDeCadastroDoCliente extends javax.swing.JPanel {
     private ArrayList<TelefoneCliente> gerarTelefonesDoCliente() {
         ArrayList<TelefoneCliente> telefones = new ArrayList<>();
         telefones.add(new TelefoneCliente(0, 0, formatTxtFieldTelefonePrimeiro.getText()));
+        telefones.add(new TelefoneCliente(0, 0, formatTxtFieldTelefoneSegundo.getText()));
         
         return telefones;
     }
@@ -382,6 +392,12 @@ public class TelaDeCadastroDoCliente extends javax.swing.JPanel {
             Mensagem.mostrarErro("O telefone deve conter apenas numeros e deve possuir de 8 a 11 caracteres.");
             return false;
         }
+        
+        if (!Validador.isTelefoneValido(formatTxtFieldTelefoneSegundo.getText())) {
+            Mensagem.mostrarErro("O telefone deve conter apenas numeros e deve possuir de 8 a 11 caracteres.");
+            return false;
+        }
+        
         return true;
     }
     
@@ -465,33 +481,10 @@ public class TelaDeCadastroDoCliente extends javax.swing.JPanel {
         }
     }
     
-    private void adicionarSegundoTelefoneAoCliente() {
-        clienteCadastrado.getTelefones().add(new TelefoneCliente(0, 0, formatTxtFieldTelefonePrimeiro.getText()));
-    }
-    
-    private boolean isSegundoTelefonePreechidoEValido() {
-        if (Validador.isTextoVazio(formatTxtFieldTelefoneSegundo.getText())) {
-            return false;
-        }
-        
-        if (!Validador.isTelefoneValido(formatTxtFieldTelefoneSegundo.getText())) {
-            Mensagem.mostrarErro("O telefone deve possuir de 8 a 11 caracteres.");
-            return false;
-        }
-        
-        return true;
-    }
-    
     private void btnConcluirCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConcluirCadastroActionPerformed
         // TODO add your handling code here:
         if(isTodosOsCamposObrigatoriosValidos()) {
             vincularCamposComCliente();
-            if (isSegundoTelefonePreechidoEValido()) {
-                adicionarSegundoTelefoneAoCliente();
-            
-            } else {
-                return;
-            }
             cadastrarCliente();
         }
     }//GEN-LAST:event_btnConcluirCadastroActionPerformed
@@ -542,6 +535,7 @@ public class TelaDeCadastroDoCliente extends javax.swing.JPanel {
     private javax.swing.JLabel lbRequiredNumeroText;
     private javax.swing.JLabel lbRequiredRuaText;
     private javax.swing.JLabel lbRequiredTelefonePrimeiroText;
+    private javax.swing.JLabel lbRequiredTelefoneSegundoText;
     private javax.swing.JLabel lbRuaText;
     private javax.swing.JLabel lbTelefonePrimeiroText;
     private javax.swing.JLabel lbTelefoneSegundoText;
