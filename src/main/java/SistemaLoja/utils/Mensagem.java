@@ -18,7 +18,7 @@ public class Mensagem {
     }
     
     public static void mostrarSucesso(String mensagem) {
-        JOptionPane.showMessageDialog(null, mensagem, "Erro", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, mensagem, "Sucesso", JOptionPane.INFORMATION_MESSAGE);
     }
     
 }
