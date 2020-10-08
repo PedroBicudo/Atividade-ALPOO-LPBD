@@ -6,6 +6,8 @@
 package SistemaLoja.view.cadastro;
 
 import SistemaLoja.view.cadastro.cliente.TelaDeCadastroDoCliente;
+import SistemaLoja.view.cadastro.distribuidor.TelaDeCadastroDoDistribuidor;
+import SistemaLoja.view.cadastro.produto.TelaDeCadastroDoProduto;
 import java.awt.ScrollPane;
 import javax.swing.JFrame;
 
@@ -16,6 +18,8 @@ import javax.swing.JFrame;
 public class TelaDeOpcoesDeCadastro extends javax.swing.JFrame {
     
     private TelaDeCadastroDoCliente telaDeCadastroDoCliente;
+    private TelaDeCadastroDoDistribuidor telaDeCadastroDoDistribuidor;
+    private TelaDeCadastroDoProduto telaDeCadastroDoProduto;
 
     /**
      * Creates new form TelaDeOpcoesDeCadastro
@@ -24,6 +28,10 @@ public class TelaDeOpcoesDeCadastro extends javax.swing.JFrame {
         initComponents();
         telaDeCadastroDoCliente = new TelaDeCadastroDoCliente();
         scrollPaneClienteCadastro.setViewportView(telaDeCadastroDoCliente);
+        telaDeCadastroDoDistribuidor = new TelaDeCadastroDoDistribuidor();
+        scrollPaneDistribuidorCadastro.setViewportView(telaDeCadastroDoDistribuidor);
+        telaDeCadastroDoProduto = new TelaDeCadastroDoProduto();
+        scrollPaneProdutoCadastro.setViewportView(telaDeCadastroDoProduto);
     }
 
     /**
