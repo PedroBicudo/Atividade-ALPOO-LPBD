@@ -9,6 +9,7 @@ import SistemaLoja.database.conexao.IBancoDao;
 import SistemaLoja.database.conexao.SQLServerDao;
 import SistemaLoja.model.contato.Telefone;
 import SistemaLoja.model.contato.TelefoneCliente;
+import SistemaLoja.model.contato.TelefoneDistribuidor;
 import SistemaLoja.model.endereco.Bairro;
 import SistemaLoja.model.endereco.Cidade;
 import SistemaLoja.model.endereco.Endereco;
@@ -17,6 +18,7 @@ import SistemaLoja.model.endereco.Residencia;
 import SistemaLoja.model.endereco.Rua;
 import SistemaLoja.model.pessoa_fisica.Cliente;
 import SistemaLoja.model.produtos.ClienteEVenda;
+import SistemaLoja.model.produtos.Distribuidor;
 import SistemaLoja.model.produtos.Produto;
 import SistemaLoja.model.produtos.Venda;
 import java.sql.PreparedStatement;
@@ -379,6 +381,25 @@ public class SQLServerSelect implements SelecionarDados {
     }
 
     @Override
+    public ArrayList<TelefoneDistribuidor> selecionarTelefonesByDistribuidorId(int distribuidorId) {
+        ArrayList<TelefoneDistribuidor> telefonesDoCliente = new ArrayList<>();
+        try {
+            String sqlSelect = "SELECT IDFK_DISTRIBUIDOR, TELEFONE FROM TELEFONE_DISTRIBUIDOR WHERE IDFK_DISTRIBUIDOR = ?";
+            PreparedStatement prepareStatement = database.getConnection().prepareStatement(sqlSelect);
+            prepareStatement.setInt(1, distribuidorId);
+            ResultSet telefone = prepareStatement.executeQuery();
+            while(telefone.next()){
+                telefonesDoCliente.add(new TelefoneDistribuidor(0, 0, telefone.getString("TELEFONE")));
+            }
+            
+        } catch (SQLException exception) {
+            System.out.println(exception.getMessage());
+        }        
+        
+        return telefonesDoCliente;        
+    }
+    
+    @Override
     public float selecionarOValorTotalDeVendas() {
         float totalDeVendas = 0F;
         try {
@@ -393,6 +414,39 @@ public class SQLServerSelect implements SelecionarDados {
         }        
         
         return totalDeVendas;        
+    }
+
+    @Override
+    public ArrayList<Distribuidor> selecionarDistribuidores() {
+        ArrayList<Distribuidor> distribuidoresEncontrados = new ArrayList<>();
+        try {
+            String sqlSelect = "SELECT ID_DISTRIBUIDOR, NOME_FANTASIA, RAZAO_SOCIAL, EMAIL FROM DISTRIBUIDOR";
+            PreparedStatement prepareStatement = database.getConnection().prepareStatement(sqlSelect);
+            ResultSet distribuidores = prepareStatement.executeQuery();
+            while(distribuidores.next()) {
+                ArrayList<TelefoneDistribuidor> telefones = selecionarTelefonesByDistribuidorId(distribuidores.getInt("ID_DISTRIBUIDOR"));            
+                distribuidoresEncontrados.add(
+                        new Distribuidor(
+                                distribuidores.getInt("ID_DISTRIBUIDOR"),
+                                distribuidores.getString("NOME_FANTASIA"), 
+                                distribuidores.getString("RAZAO_SOCIAL"), 
+                                distribuidores.getString("EMAIL"), 
+                                telefones)
+                        );
+            }
+            
+            
+        } catch (SQLException exception) {
+            System.out.println(exception.getMessage());
+        }        
+        
+        return distribuidoresEncontrados;
+    }
+    
+    public static void main(String[] args) {
+        System.out.println(
+                SQLServerDao.getInstance().getSelecionarActions().selecionarDistribuidores().size()
+        );
     }
     
 }
