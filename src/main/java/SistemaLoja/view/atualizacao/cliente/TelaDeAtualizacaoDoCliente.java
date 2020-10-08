@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package SistemaLoja.view.cadastro.cliente;
+package SistemaLoja.view.atualizacao.cliente;
 
+import SistemaLoja.view.cadastro.cliente.*;
 import SistemaLoja.database.conexao.IBancoDao;
 import SistemaLoja.database.conexao.SQLServerDao;
 import SistemaLoja.model.contato.TelefoneCliente;
@@ -30,26 +31,36 @@ import javax.swing.event.ListSelectionListener;
  *
  * @author pedroh
  */
-public class TelaDeCadastroDoCliente extends javax.swing.JPanel {
+public class TelaDeAtualizacaoDoCliente extends javax.swing.JPanel {
     
     private IBancoDao database;
     private Cliente clienteCadastrado;
     private ArrayList<Estado> estadosDisponiveis;
+    private ArrayList<Cliente> clientesDisponiveis;
     
 
     /**
      * Creates new form CadastroCliente
      */
-    public TelaDeCadastroDoCliente() {
+    public TelaDeAtualizacaoDoCliente() {
         initComponents();
         database = SQLServerDao.getInstance();
         estadosDisponiveis = database.getSelecionarActions().selecionarTodosOsEstados();
+        clientesDisponiveis = database.getSelecionarActions().selecionarClientes();
         adicionarEstadosAoComboBox();
+        adicionarCLientesAoComboBox();
     }
     
-    public void adicionarEstadosAoComboBox() {
+    private void adicionarEstadosAoComboBox() {
         for (Estado estado: estadosDisponiveis) {
             comboBoxEstados.addItem(estado.getNome());
+        }
+    }
+    
+    private void adicionarCLientesAoComboBox() {
+        comboBoxClientes.removeAllItems();
+        for (Cliente cliente: clientesDisponiveis) {
+            comboBoxClientes.addItem(cliente.getIdCliente()+" - "+cliente.getNome());
         }
     }
     
@@ -66,7 +77,7 @@ public class TelaDeCadastroDoCliente extends javax.swing.JPanel {
         lbEmailText = new javax.swing.JLabel();
         txtFieldNomeCliente = new javax.swing.JTextField();
         txtFieldEmailCliente = new javax.swing.JTextField();
-        btnConcluirCadastro = new javax.swing.JButton();
+        btnAtualizarDados = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         lbEnderecoText = new javax.swing.JLabel();
         lbCidadeText = new javax.swing.JLabel();
@@ -96,15 +107,19 @@ public class TelaDeCadastroDoCliente extends javax.swing.JPanel {
         formatTxtFieldTelefonePrimeiro = new javax.swing.JFormattedTextField();
         formatTxtFieldNumeroResidencia = new javax.swing.JFormattedTextField();
         formatTxtFieldTelefoneSegundo = new javax.swing.JFormattedTextField();
+        comboBoxClientes = new javax.swing.JComboBox<>();
+        lbClienteText = new javax.swing.JLabel();
+        btnPreencherCampos = new javax.swing.JButton();
+        lbRequiredTelefoneSegundoText = new javax.swing.JLabel();
 
         lbNomeText.setText("Nome");
 
         lbEmailText.setText("Email");
 
-        btnConcluirCadastro.setText("Concluir Cadastro");
-        btnConcluirCadastro.addActionListener(new java.awt.event.ActionListener() {
+        btnAtualizarDados.setText("Concluir Atualização");
+        btnAtualizarDados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConcluirCadastroActionPerformed(evt);
+                btnAtualizarDadosActionPerformed(evt);
             }
         });
 
@@ -191,39 +206,29 @@ public class TelaDeCadastroDoCliente extends javax.swing.JPanel {
             }
         });
 
+        comboBoxClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxClientesActionPerformed(evt);
+            }
+        });
+
+        lbClienteText.setText("Cliente");
+
+        btnPreencherCampos.setText("Mostrar");
+        btnPreencherCampos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreencherCamposActionPerformed(evt);
+            }
+        });
+
+        lbRequiredTelefoneSegundoText.setForeground(new java.awt.Color(255, 51, 51));
+        lbRequiredTelefoneSegundoText.setText("(Obrigatório)");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnConcluirCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lbDataNascimentoText)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(formattxtFieldDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbRequiredDataNascimentoText))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(37, 37, 37)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lbTelefoneSegundoText)
-                                    .addComponent(lbTelefonePrimeiroText))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(formatTxtFieldTelefonePrimeiro, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lbRequiredTelefonePrimeiroText))
-                                    .addComponent(formatTxtFieldTelefoneSegundo, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,20 +271,61 @@ public class TelaDeCadastroDoCliente extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbNomeText)
-                            .addComponent(lbEmailText))
-                        .addGap(31, 31, 31)
+                            .addComponent(lbEmailText)
+                            .addComponent(lbClienteText))
+                        .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtFieldEmailCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtFieldNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(comboBoxClientes, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtFieldNomeCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbRequiredNomeText)))))
-                .addContainerGap(198, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbRequiredNomeText)
+                                    .addComponent(btnPreencherCampos))))))
+                .addContainerGap(190, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(462, Short.MAX_VALUE)
+                        .addComponent(btnAtualizarDados, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(lbDataNascimentoText)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(formattxtFieldDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbRequiredDataNascimentoText))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(37, 37, 37)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lbTelefoneSegundoText)
+                                    .addComponent(lbTelefonePrimeiroText))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(formatTxtFieldTelefonePrimeiro, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lbRequiredTelefonePrimeiroText))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(formatTxtFieldTelefoneSegundo, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lbRequiredTelefoneSegundoText)))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboBoxClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbClienteText)
+                    .addComponent(btnPreencherCampos))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbNomeText)
                     .addComponent(txtFieldNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -301,16 +347,14 @@ public class TelaDeCadastroDoCliente extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbTelefoneSegundoText)
-                    .addComponent(formatTxtFieldTelefoneSegundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(formatTxtFieldTelefoneSegundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbRequiredTelefoneSegundoText))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbEnderecoText)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnConcluirCadastro)
-                        .addContainerGap())
+                        .addComponent(lbEnderecoText))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -340,8 +384,10 @@ public class TelaDeCadastroDoCliente extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbDescricaoResidenciaText))
-                        .addGap(70, 85, Short.MAX_VALUE))))
+                            .addComponent(lbDescricaoResidenciaText))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnAtualizarDados)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
     private boolean isAlgumCampoObrigatorioVazio() {
@@ -349,6 +395,7 @@ public class TelaDeCadastroDoCliente extends javax.swing.JPanel {
                 Validador.isTextoVazio(txtFieldNomeCliente.getText()) ||
                 Validador.isTextoVazio(formattxtFieldDataNascimento.getText()) ||
                 Validador.isTextoVazio(formatTxtFieldTelefonePrimeiro.getText()) ||
+                Validador.isTextoVazio(formatTxtFieldTelefoneSegundo.getText()) ||
                 Validador.isTextoVazio(txtFieldCidade.getText()) ||
                 Validador.isTextoVazio(txtFieldBairro.getText()) ||
                 Validador.isTextoVazio(txtFieldRua.getText()) ||
@@ -359,22 +406,64 @@ public class TelaDeCadastroDoCliente extends javax.swing.JPanel {
         return Validador.isNumero(txtFieldNomeCliente.getText());
     }
     
-    private ArrayList<TelefoneCliente> gerarTelefonesDoCliente() {
-        ArrayList<TelefoneCliente> telefones = new ArrayList<>();
-        telefones.add(new TelefoneCliente(0, 0, formatTxtFieldTelefonePrimeiro.getText()));
+    private ArrayList<TelefoneCliente> gerarTelefonesDoClienteAtualizados() {
+        ArrayList<TelefoneCliente> telefones = clienteCadastrado.getTelefones();
+        telefones.get(0).setTelefone(formatTxtFieldTelefonePrimeiro.getText());
+        telefones.get(1).setTelefone(formatTxtFieldTelefoneSegundo.getText());
         
         return telefones;
+    }    
+    
+    private void atualizarResidenciaDoCliente(Residencia residencia) {
+        residencia.setNumero(Integer.parseInt(formatTxtFieldNumeroResidencia.getText()));
+        residencia.setDescricao(txtAreaDescricaoResidencia.getText());
     }
     
-    private Endereco gerarEnderecoDoCliente() {
-        Endereco endereco = new Endereco(
-                new Residencia(0, 0, Integer.parseInt(formatTxtFieldNumeroResidencia.getText()), txtAreaDescricaoResidencia.getText()),
-                new Rua(0, 0, txtFieldBairro.getText()),
-                new Bairro(0, 0, txtFieldBairro.getText()),
-                new Cidade(0, 0, txtFieldCidade.getText()),
-                estadosDisponiveis.get(comboBoxEstados.getSelectedIndex())
-        );
-        return endereco;
+    private void atualizarRuaDoCliente(Rua rua) {
+        rua.setNome(txtFieldRua.getText());
+    
+    }
+    
+    private void atualizarBairroDoCliente(Bairro bairro) {
+        bairro.setNome(txtFieldBairro.getText());
+    }
+    
+    private void atualizarCidadeDoCliente(Cidade cidade, int idNovoEstado) {
+        cidade.setNome(txtFieldCidade.getText());
+        cidade.setIdfkEstado(idNovoEstado);
+    }
+    
+    private void atualizarEstadoDoCliente(Estado estado) {
+        Estado estadoSelecionado = estadosDisponiveis.get(comboBoxEstados.getSelectedIndex());
+        estado.setIdEstado(estadoSelecionado.getIdEstado());
+        estado.setNome(estadoSelecionado.getNome());
+        estado.setSigla(estadoSelecionado.getSigla());
+    }
+    
+    private Endereco gerarEnderecoDoClienteAtualizado() {
+        Endereco enderecoCliente = clienteCadastrado.getEndereco();
+        
+        Residencia residenciaCliente = enderecoCliente.getResidencia();
+        Rua ruaCliente = enderecoCliente.getRua();
+        Bairro bairroCliente = enderecoCliente.getBairro();
+        Cidade cidadeCliente = enderecoCliente.getCidade();
+        Estado estadoCliente = enderecoCliente.getEstado();
+        
+        atualizarResidenciaDoCliente(residenciaCliente);
+        
+        atualizarRuaDoCliente(ruaCliente);
+        atualizarBairroDoCliente(bairroCliente);
+        atualizarEstadoDoCliente(estadoCliente);
+        atualizarCidadeDoCliente(cidadeCliente, estadoCliente.getIdEstado());
+        
+        
+        enderecoCliente.setResidencia(residenciaCliente);
+        enderecoCliente.setRua(ruaCliente);
+        enderecoCliente.setBairro(bairroCliente);
+        enderecoCliente.setCidade(cidadeCliente);
+        enderecoCliente.setEstado(estadoCliente);
+        
+        return enderecoCliente;
     }
     
     private boolean isCampoDeContatoValido() {
@@ -446,55 +535,82 @@ public class TelaDeCadastroDoCliente extends javax.swing.JPanel {
     }
     
     private void vincularCamposComCliente() {
-        clienteCadastrado = new Cliente(
-                0, 
-                txtFieldNomeCliente.getText(), 
-                Conversor.StringParaData(formattxtFieldDataNascimento.getText()), 
-                txtFieldEmailCliente.getText().trim(), 
-                gerarEnderecoDoCliente(), 
-                gerarTelefonesDoCliente()
-        );
+        clienteCadastrado.setNome(txtFieldNomeCliente.getText());
+        clienteCadastrado.setEndereco(gerarEnderecoDoClienteAtualizado());
+        clienteCadastrado.setEmail(txtFieldEmailCliente.getText());
+        clienteCadastrado.setDataNascimento(Conversor.StringParaData(formattxtFieldDataNascimento.getText()));
+        clienteCadastrado.setTelefones(gerarTelefonesDoClienteAtualizados());
     }
     
-    private void cadastrarCliente() {
-        boolean isCadastroBemSucedido = database.getInserirActions().inserirCliente(clienteCadastrado);
-        if (isCadastroBemSucedido) {
-            Mensagem.mostrarSucesso("Cliente cadastrado com sucesso");
-        } else {
-            Mensagem.mostrarErro("Falha ao cadastrarar o cliente");
-        }
+    private boolean atualizarCamposDeEnderecoNoBanco() {
+        Endereco enderecoDoCliente = clienteCadastrado.getEndereco();
+        
+        boolean isAtualizacaoResidenciaConcluida = database
+                .getAtualizarActions()
+                .atualizarResidencia(enderecoDoCliente.getResidencia());
+        
+        boolean isAtualizacaoRuaConcluida = database
+                .getAtualizarActions()
+                .atualizarRua(enderecoDoCliente.getRua());
+        
+        boolean isAtualizacaoBairroConcluida = database
+                .getAtualizarActions()
+                .atualizarBairro(enderecoDoCliente.getBairro());
+        
+        boolean isAtualizacaoCidadeConcluida = database
+                .getAtualizarActions()
+                .atualizarCidade(enderecoDoCliente.getCidade());
+        
+        return isAtualizacaoResidenciaConcluida &&
+               isAtualizacaoBairroConcluida &&
+               isAtualizacaoRuaConcluida &&
+               isAtualizacaoCidadeConcluida;
     }
     
-    private void adicionarSegundoTelefoneAoCliente() {
-        clienteCadastrado.getTelefones().add(new TelefoneCliente(0, 0, formatTxtFieldTelefonePrimeiro.getText()));
-    }
-    
-    private boolean isSegundoTelefonePreechidoEValido() {
-        if (Validador.isTextoVazio(formatTxtFieldTelefoneSegundo.getText())) {
-            return false;
+    private boolean atualizarTelefonesNoBanco() {
+        boolean isAtualizacaoTelefonesConcluida = true;
+        for (TelefoneCliente telefoneCliente: clienteCadastrado.getTelefones()) {
+            isAtualizacaoTelefonesConcluida = isAtualizacaoTelefonesConcluida &&
+                    database.getAtualizarActions().atualizarTelefoneCliente(telefoneCliente);
         }
         
-        if (!Validador.isTelefoneValido(formatTxtFieldTelefoneSegundo.getText())) {
-            Mensagem.mostrarErro("O telefone deve possuir de 8 a 11 caracteres.");
-            return false;
-        }
-        
-        return true;
+        return isAtualizacaoTelefonesConcluida;
     }
     
-    private void btnConcluirCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConcluirCadastroActionPerformed
+    private boolean atualizarInformacoesDoCliente() {
+        return database.getAtualizarActions().atualizarCliente(clienteCadastrado);
+    }
+
+    private void atualizarCliente() {
+        
+        if (!atualizarInformacoesDoCliente()) {
+            Mensagem.mostrarErro("Erro ao atualizar os campos de endereço");
+            return;
+        } 
+
+        if (!atualizarCamposDeEnderecoNoBanco()) {
+            Mensagem.mostrarErro("Erro ao atualizar os campos de endereço");
+            return;
+        }
+        
+        if (!atualizarTelefonesNoBanco()) {   
+            Mensagem.mostrarErro("Erro ao atualizar os campos de endereço");
+            return;
+        }
+        
+        Mensagem.mostrarSucesso("Cliente atualizado.");
+        
+        clientesDisponiveis = database.getSelecionarActions().selecionarClientes();
+        adicionarCLientesAoComboBox();
+    }
+    
+    private void btnAtualizarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarDadosActionPerformed
         // TODO add your handling code here:
         if(isTodosOsCamposObrigatoriosValidos()) {
             vincularCamposComCliente();
-            if (isSegundoTelefonePreechidoEValido()) {
-                adicionarSegundoTelefoneAoCliente();
-            
-            } else {
-                return;
-            }
-            cadastrarCliente();
+            atualizarCliente();
         }
-    }//GEN-LAST:event_btnConcluirCadastroActionPerformed
+    }//GEN-LAST:event_btnAtualizarDadosActionPerformed
 
     private void formattxtFieldDataNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formattxtFieldDataNascimentoActionPerformed
         // TODO add your handling code here:
@@ -515,9 +631,52 @@ public class TelaDeCadastroDoCliente extends javax.swing.JPanel {
     private void formatTxtFieldTelefoneSegundoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formatTxtFieldTelefoneSegundoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_formatTxtFieldTelefoneSegundoActionPerformed
+    
+    private void preencherCamposDeEnderecoDoCliente() {
+        Endereco enderecoCliente = clienteCadastrado.getEndereco();
+        
+        comboBoxEstados.setSelectedItem(enderecoCliente.getEstado().getNome());
+        txtFieldCidade.setText(enderecoCliente.getCidade().getNome());
+        txtFieldBairro.setText(enderecoCliente.getBairro().getNome());
+        txtFieldRua.setText(enderecoCliente.getRua().getNome());
+        formatTxtFieldNumeroResidencia.setText(String.valueOf(enderecoCliente.getResidencia().getNumero()));
+        txtAreaDescricaoResidencia.setText(enderecoCliente.getResidencia().getDescricao());    
+    }
+    
+    private void preencherCamposDeContato() {
+        txtFieldEmailCliente.setText(clienteCadastrado.getEmail());
+        formatTxtFieldTelefonePrimeiro.setText(String.valueOf(clienteCadastrado.getTelefones().get(0).getTelefone()));
+        if (clienteCadastrado.getTelefones().size() > 1) {
+            formatTxtFieldTelefoneSegundo.setText(String.valueOf(clienteCadastrado.getTelefones().get(1).getTelefone()));
+        }    
+    }
+    
+    private void preencherInformacoesPessoaisDoCliente() {
+        txtFieldNomeCliente.setText(clienteCadastrado.getNome());
+        formattxtFieldDataNascimento.setText(Conversor.dateToString(clienteCadastrado.getDataNascimento()));    
+        preencherCamposDeContato();
+        preencherCamposDeEnderecoDoCliente();
+    }
+    
+    
+    private void inserirInformacoesDoClienteNaTela() {
+        preencherInformacoesPessoaisDoCliente();
+    }
+    
+    private void btnPreencherCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreencherCamposActionPerformed
+        // TODO add your handling code here:
+        clienteCadastrado = clientesDisponiveis.get(comboBoxClientes.getSelectedIndex());
+        inserirInformacoesDoClienteNaTela();
+    }//GEN-LAST:event_btnPreencherCamposActionPerformed
+
+    private void comboBoxClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxClientesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxClientesActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnConcluirCadastro;
+    private javax.swing.JButton btnAtualizarDados;
+    private javax.swing.JButton btnPreencherCampos;
+    private javax.swing.JComboBox<String> comboBoxClientes;
     private javax.swing.JComboBox<String> comboBoxEstados;
     private javax.swing.JFormattedTextField formatTxtFieldNumeroResidencia;
     private javax.swing.JFormattedTextField formatTxtFieldTelefonePrimeiro;
@@ -527,6 +686,7 @@ public class TelaDeCadastroDoCliente extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lbBairroText;
     private javax.swing.JLabel lbCidadeText;
+    private javax.swing.JLabel lbClienteText;
     private javax.swing.JLabel lbDataNascimentoText;
     private javax.swing.JLabel lbDescricaoResidenciaText;
     private javax.swing.JLabel lbEmailText;
@@ -542,6 +702,7 @@ public class TelaDeCadastroDoCliente extends javax.swing.JPanel {
     private javax.swing.JLabel lbRequiredNumeroText;
     private javax.swing.JLabel lbRequiredRuaText;
     private javax.swing.JLabel lbRequiredTelefonePrimeiroText;
+    private javax.swing.JLabel lbRequiredTelefoneSegundoText;
     private javax.swing.JLabel lbRuaText;
     private javax.swing.JLabel lbTelefonePrimeiroText;
     private javax.swing.JLabel lbTelefoneSegundoText;
