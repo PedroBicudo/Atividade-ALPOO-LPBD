@@ -6,6 +6,7 @@
 package SistemaLoja.view.atualizacao;
 
 import SistemaLoja.view.atualizacao.cliente.TelaDeAtualizacaoDoCliente;
+import SistemaLoja.view.atualizacao.distribuidor.TelaDeAtualizacaoDoDistribuidor;
 import SistemaLoja.view.atualizacao.produto.TelaDeAtualizacaoDoProduto;
 
 /**
@@ -16,6 +17,7 @@ public class TelaDeOpcoesDeAtualizacao extends javax.swing.JFrame {
     
     private TelaDeAtualizacaoDoCliente telaDeAtualizacaoDoCliente;
     private TelaDeAtualizacaoDoProduto telaDeAtualizacaoDoProduto;
+    private TelaDeAtualizacaoDoDistribuidor telaDeAtualizacaoDoDistribuidor;
 
     /**
      * Creates new form TelaDeOpcoesDeAtualizacao
@@ -26,7 +28,10 @@ public class TelaDeOpcoesDeAtualizacao extends javax.swing.JFrame {
         scrollPaneCliente.setViewportView(telaDeAtualizacaoDoCliente);
         telaDeAtualizacaoDoProduto = new TelaDeAtualizacaoDoProduto();
         scrollPaneProduto.setViewportView(telaDeAtualizacaoDoProduto);
+        telaDeAtualizacaoDoDistribuidor = new TelaDeAtualizacaoDoDistribuidor();
+        scrollPaneDistribuidor.setViewportView(telaDeAtualizacaoDoDistribuidor);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
