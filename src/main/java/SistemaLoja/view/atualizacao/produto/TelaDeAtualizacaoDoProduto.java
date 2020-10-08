@@ -37,9 +37,11 @@ public class TelaDeAtualizacaoDoProduto extends javax.swing.JPanel {
         adicionarDistribuidoresAoComboBox();
         produtosDisponiveis = database.getSelecionarActions().selecionarProdutos();
         adicionarProdutosAoComboBox();
+        btnConcluirAtualizacao.setEnabled(false);
     }
     
     private void adicionarDistribuidoresAoComboBox() {
+        comboBoxDistribuidor.removeAllItems();
         for (Distribuidor distribuidor: distribuidoresDisponiveis) {
             comboBoxDistribuidor.addItem(distribuidor.getNomeFantasia());
         }
@@ -83,6 +85,8 @@ public class TelaDeAtualizacaoDoProduto extends javax.swing.JPanel {
         lbObrigatorioEstoqueText1 = new javax.swing.JLabel();
         comboBoxProdutos = new javax.swing.JComboBox<>();
         btnMostrarProduto = new javax.swing.JButton();
+        btnAtualizarListaDeProdutos = new javax.swing.JButton();
+        btnAtualizarListaDeDistribuidores = new javax.swing.JButton();
 
         lbDistribuidorText.setText("Distribuidor");
 
@@ -165,6 +169,20 @@ public class TelaDeAtualizacaoDoProduto extends javax.swing.JPanel {
             }
         });
 
+        btnAtualizarListaDeProdutos.setText("Tem novos produtos?");
+        btnAtualizarListaDeProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarListaDeProdutosActionPerformed(evt);
+            }
+        });
+
+        btnAtualizarListaDeDistribuidores.setText("Tem novos distribuidores?");
+        btnAtualizarListaDeDistribuidores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarListaDeDistribuidoresActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -173,49 +191,53 @@ public class TelaDeAtualizacaoDoProduto extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbDistribuidorText)
-                            .addComponent(lbDescricaoText))
-                        .addGap(45, 45, 45)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboBoxDistribuidor, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbObrigatorioDescricaoText)
-                            .addComponent(lbObrigatorioDistribuidorText)))
+                        .addComponent(btnAtualizarListaDeProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                        .addComponent(btnConcluirAtualizacao, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(lbPrecoVendaText)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(formatTxtFieldPrecoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbPrecoCompraText)
-                                    .addComponent(lbValidadeText)
-                                    .addComponent(lbEstoque)
-                                    .addComponent(lbProdutoText))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(formatTxtFieldValidade)
-                                    .addComponent(formatTxtFieldPrecoCompra, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(formatTxtFieldEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(lbObrigatorioEstoqueText1))
-                                    .addComponent(comboBoxProdutos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbObrigatorioValidadeText)
-                            .addComponent(lbObrigatorioPrecoCompraText)
-                            .addComponent(lbObrigatorioPrecoVendaText)
-                            .addComponent(btnMostrarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(319, Short.MAX_VALUE)
-                .addComponent(btnConcluirAtualizacao, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbDistribuidorText)
+                                    .addComponent(lbDescricaoText))
+                                .addGap(45, 45, 45)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtFieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(comboBoxDistribuidor, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbObrigatorioDescricaoText)
+                                    .addComponent(lbObrigatorioDistribuidorText)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(lbPrecoVendaText)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(formatTxtFieldPrecoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lbPrecoCompraText)
+                                            .addComponent(lbValidadeText)
+                                            .addComponent(lbEstoque)
+                                            .addComponent(lbProdutoText))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(formatTxtFieldValidade)
+                                            .addComponent(formatTxtFieldPrecoCompra, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(formatTxtFieldEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(lbObrigatorioEstoqueText1))
+                                            .addComponent(comboBoxProdutos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbObrigatorioValidadeText)
+                                    .addComponent(lbObrigatorioPrecoCompraText)
+                                    .addComponent(lbObrigatorioPrecoVendaText)
+                                    .addComponent(btnMostrarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnAtualizarListaDeDistribuidores, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,8 +280,12 @@ public class TelaDeAtualizacaoDoProduto extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtFieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lbObrigatorioDescricaoText)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
-                .addComponent(btnConcluirAtualizacao)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addComponent(btnAtualizarListaDeDistribuidores)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnConcluirAtualizacao)
+                    .addComponent(btnAtualizarListaDeProdutos))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -389,6 +415,11 @@ public class TelaDeAtualizacaoDoProduto extends javax.swing.JPanel {
 
     private void btnConcluirAtualizacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConcluirAtualizacaoActionPerformed
         // TODO add your handling code here:
+        if (distribuidoresDisponiveis.size() < 1) {
+            Mensagem.mostrarErro("Não existem distribuidores cadastrados.");
+            return;
+        }
+        
         if (isTodosOsCamposObrigatoriosValidos()) {
             atualizarProduto();
         }
@@ -416,11 +447,53 @@ public class TelaDeAtualizacaoDoProduto extends javax.swing.JPanel {
     
     private void btnMostrarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarProdutoActionPerformed
         // TODO add your handling code here:
-        preencherCampos();
+        if (produtosDisponiveis.size() > 0) {
+            preencherCampos();
+            btnConcluirAtualizacao.setEnabled(true);
+        } else {
+            Mensagem.mostrarErro("Não existem produtos cadastros no sistema.");
+        }
+        
     }//GEN-LAST:event_btnMostrarProdutoActionPerformed
+
+    private void btnAtualizarListaDeProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarListaDeProdutosActionPerformed
+        // TODO add your handling code here:
+        int tamanhoAntigo = produtosDisponiveis.size();
+        produtosDisponiveis = database.getSelecionarActions().selecionarProdutos();
+        adicionarProdutosAoComboBox();
+        int tamanhoNovo = produtosDisponiveis.size();
+        int quantidadeNovosProdutos = tamanhoNovo - tamanhoAntigo;
+        if (quantidadeNovosProdutos < 0) {
+            Mensagem.mostrarSucesso(Math.abs(quantidadeNovosProdutos)+" foram removidos.");
+        } else if (quantidadeNovosProdutos > 0) {
+            Mensagem.mostrarSucesso(Math.abs(quantidadeNovosProdutos)+" foram adicionados.");        
+        } else {
+            Mensagem.mostrarSucesso("Nenhuma alteração.");
+        }
+        
+    }//GEN-LAST:event_btnAtualizarListaDeProdutosActionPerformed
+
+    private void btnAtualizarListaDeDistribuidoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarListaDeDistribuidoresActionPerformed
+        // TODO add your handling code here:
+        int tamanhoAntigo = distribuidoresDisponiveis.size();
+        distribuidoresDisponiveis = database.getSelecionarActions().selecionarDistribuidores();
+        adicionarDistribuidoresAoComboBox();
+        int tamanhoNovo = distribuidoresDisponiveis.size();
+        int quantidadeNovosDistribuidores = tamanhoNovo - tamanhoAntigo;
+        if (quantidadeNovosDistribuidores < 0) {
+            Mensagem.mostrarSucesso(Math.abs(quantidadeNovosDistribuidores)+" foram removidos.");
+        } else if (quantidadeNovosDistribuidores > 0) {
+            Mensagem.mostrarSucesso(Math.abs(quantidadeNovosDistribuidores)+" foram adicionados.");        
+        } else {
+            Mensagem.mostrarSucesso("Nenhuma alteração.");
+        }        
+        
+    }//GEN-LAST:event_btnAtualizarListaDeDistribuidoresActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtualizarListaDeDistribuidores;
+    private javax.swing.JButton btnAtualizarListaDeProdutos;
     private javax.swing.JButton btnConcluirAtualizacao;
     private javax.swing.JButton btnMostrarProduto;
     private javax.swing.JComboBox<String> comboBoxDistribuidor;

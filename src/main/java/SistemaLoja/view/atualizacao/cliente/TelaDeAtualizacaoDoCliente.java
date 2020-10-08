@@ -49,6 +49,7 @@ public class TelaDeAtualizacaoDoCliente extends javax.swing.JPanel {
         clientesDisponiveis = database.getSelecionarActions().selecionarClientes();
         adicionarEstadosAoComboBox();
         adicionarCLientesAoComboBox();
+        btnAtualizarDados.setEnabled(false);
     }
     
     private void adicionarEstadosAoComboBox() {
@@ -111,6 +112,7 @@ public class TelaDeAtualizacaoDoCliente extends javax.swing.JPanel {
         lbClienteText = new javax.swing.JLabel();
         btnPreencherCampos = new javax.swing.JButton();
         lbRequiredTelefoneSegundoText = new javax.swing.JLabel();
+        btnAtualizarListaDeClientes = new javax.swing.JButton();
 
         lbNomeText.setText("Nome");
 
@@ -224,6 +226,13 @@ public class TelaDeAtualizacaoDoCliente extends javax.swing.JPanel {
         lbRequiredTelefoneSegundoText.setForeground(new java.awt.Color(255, 51, 51));
         lbRequiredTelefoneSegundoText.setText("(Obrigatório)");
 
+        btnAtualizarListaDeClientes.setText("Tem cliente novo?");
+        btnAtualizarListaDeClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarListaDeClientesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -288,7 +297,9 @@ public class TelaDeAtualizacaoDoCliente extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(462, Short.MAX_VALUE)
+                        .addContainerGap()
+                        .addComponent(btnAtualizarListaDeClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAtualizarDados, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -386,7 +397,9 @@ public class TelaDeAtualizacaoDoCliente extends javax.swing.JPanel {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbDescricaoResidenciaText))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnAtualizarDados)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAtualizarDados)
+                    .addComponent(btnAtualizarListaDeClientes))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -665,16 +678,39 @@ public class TelaDeAtualizacaoDoCliente extends javax.swing.JPanel {
     
     private void btnPreencherCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPreencherCamposActionPerformed
         // TODO add your handling code here:
-        clienteCadastrado = clientesDisponiveis.get(comboBoxClientes.getSelectedIndex());
-        inserirInformacoesDoClienteNaTela();
+        if (clientesDisponiveis.size() > 0) {
+            clienteCadastrado = clientesDisponiveis.get(comboBoxClientes.getSelectedIndex());
+            inserirInformacoesDoClienteNaTela();            
+            btnAtualizarDados.setEnabled(true);
+        } else {
+            Mensagem.mostrarErro("Não existem clientes a serem atualizados.");
+        }
+
     }//GEN-LAST:event_btnPreencherCamposActionPerformed
 
     private void comboBoxClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxClientesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboBoxClientesActionPerformed
 
+    private void btnAtualizarListaDeClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarListaDeClientesActionPerformed
+        // TODO add your handling code here:
+        int tamanhoAntigo = clientesDisponiveis.size();
+        clientesDisponiveis = database.getSelecionarActions().selecionarClientes();
+        adicionarCLientesAoComboBox();
+        int tamanhoNovo = clientesDisponiveis.size();
+        int quantidadeNovosClientes = tamanhoNovo - tamanhoAntigo;
+        if (quantidadeNovosClientes < 0) {
+            Mensagem.mostrarSucesso(Math.abs(quantidadeNovosClientes)+" foram removidos.");
+        } else if (quantidadeNovosClientes > 0) {
+            Mensagem.mostrarSucesso(Math.abs(quantidadeNovosClientes)+" foram adicionados.");        
+        } else {
+            Mensagem.mostrarSucesso("Nenhuma alteração.");
+        }                
+    }//GEN-LAST:event_btnAtualizarListaDeClientesActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtualizarDados;
+    private javax.swing.JButton btnAtualizarListaDeClientes;
     private javax.swing.JButton btnPreencherCampos;
     private javax.swing.JComboBox<String> comboBoxClientes;
     private javax.swing.JComboBox<String> comboBoxEstados;
