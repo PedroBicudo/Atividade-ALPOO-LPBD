@@ -35,6 +35,7 @@ import javax.swing.JScrollPane;
 public class TelaDeCompraPanel extends javax.swing.JFrame implements ProdutosCompradosAcoes {
     
     private ArrayList<Produto> produtosDoBanco;
+    private ArrayList<Cliente> clientesDisponiveis;
     private ProdutoComprado[] produtosCompradosPeloCliente;
     private float totalDaCompra;
     private Cliente clienteDaSessao;
@@ -48,15 +49,22 @@ public class TelaDeCompraPanel extends javax.swing.JFrame implements ProdutosCom
         initComponents();
         initComponentsExtras();
         database = SQLServerDao.getInstance();
+        clientesDisponiveis = database.getSelecionarActions().selecionarClientes();
+        popularClientesNoComboBox();
         totalDaCompra = 0F;
-        
     }
     
-    public void initComponentsExtras() {
+    private void popularClientesNoComboBox() {
+        comboBoxClientes.removeAllItems();
+        for (Cliente cliente: clientesDisponiveis) {
+            comboBoxClientes.addItem(cliente.getIdCliente()+" - "+cliente.getNome());
+        }
+    }
+    
+    private void initComponentsExtras() {
         paneProdutosContainer = new JPanel();
         scrollPaneProdutos.setViewportView(paneProdutosContainer);
         paneProdutosContainer.setLayout(new BoxLayout(paneProdutosContainer, BoxLayout.Y_AXIS));
-        btnCarregarProdutos.setEnabled(false);
         btnFinalizarCompra.setEnabled(false);
     }
 
@@ -72,11 +80,11 @@ public class TelaDeCompraPanel extends javax.swing.JFrame implements ProdutosCom
         scrollPaneProdutos = new javax.swing.JScrollPane();
         btnFinalizarCompra = new javax.swing.JButton();
         lbCodCliente = new javax.swing.JLabel();
-        txtFieldCodCliente = new javax.swing.JTextField();
         btnCarregarProdutos = new javax.swing.JButton();
-        btnValidarCliente = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         btnReiniciarTela = new javax.swing.JButton();
+        comboBoxClientes = new javax.swing.JComboBox<>();
+        btnAtualizarClientes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,12 +97,6 @@ public class TelaDeCompraPanel extends javax.swing.JFrame implements ProdutosCom
 
         lbCodCliente.setText("Código do cliente");
 
-        txtFieldCodCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFieldCodClienteActionPerformed(evt);
-            }
-        });
-
         btnCarregarProdutos.setText("Carregar Produtos");
         btnCarregarProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,17 +104,23 @@ public class TelaDeCompraPanel extends javax.swing.JFrame implements ProdutosCom
             }
         });
 
-        btnValidarCliente.setText("Validar Cliente");
-        btnValidarCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnValidarClienteActionPerformed(evt);
-            }
-        });
-
         btnReiniciarTela.setText("Reiniciar tela");
         btnReiniciarTela.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReiniciarTelaActionPerformed(evt);
+            }
+        });
+
+        comboBoxClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxClientesActionPerformed(evt);
+            }
+        });
+
+        btnAtualizarClientes.setText("Tem novos clientes?");
+        btnAtualizarClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarClientesActionPerformed(evt);
             }
         });
 
@@ -128,7 +136,9 @@ public class TelaDeCompraPanel extends javax.swing.JFrame implements ProdutosCom
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnReiniciarTela, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addContainerGap()
+                        .addComponent(btnAtualizarClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnFinalizarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addContainerGap()
@@ -136,13 +146,11 @@ public class TelaDeCompraPanel extends javax.swing.JFrame implements ProdutosCom
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addComponent(lbCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtFieldCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnValidarCliente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboBoxClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(134, 134, 134)
                         .addComponent(jLabel2)
-                        .addGap(0, 122, Short.MAX_VALUE)))
+                        .addGap(0, 64, Short.MAX_VALUE)))
                 .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
@@ -151,17 +159,18 @@ public class TelaDeCompraPanel extends javax.swing.JFrame implements ProdutosCom
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbCodCliente)
-                    .addComponent(txtFieldCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnValidarCliente)
-                    .addComponent(jLabel2))
-                .addGap(79, 79, 79)
+                    .addComponent(jLabel2)
+                    .addComponent(comboBoxClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(80, 80, 80)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnCarregarProdutos, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                     .addComponent(btnReiniciarTela, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrollPaneProdutos, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(btnFinalizarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnFinalizarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAtualizarClientes))
                 .addContainerGap())
         );
 
@@ -169,6 +178,12 @@ public class TelaDeCompraPanel extends javax.swing.JFrame implements ProdutosCom
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarCompraActionPerformed
+        if (comboBoxClientes.getSelectedIndex() < 0) {
+            Mensagem.mostrarErro("Não existe cliente cadastrado para realizar a compra. Pressione 'Tem novos clientes?' para atualizar.");
+            return;
+        }
+        
+        clienteDaSessao = clientesDisponiveis.get(comboBoxClientes.getSelectedIndex());
         ArrayList<ProdutoComprado> produtosCompradosPeloCliente = obterProdutosComprados();
         if (produtosCompradosPeloCliente.size() > 0) {
             calcularTotalDaCompra(produtosCompradosPeloCliente);
@@ -182,42 +197,47 @@ public class TelaDeCompraPanel extends javax.swing.JFrame implements ProdutosCom
         }
     }//GEN-LAST:event_btnFinalizarCompraActionPerformed
 
-    private void txtFieldCodClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldCodClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFieldCodClienteActionPerformed
-
     private void btnCarregarProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarregarProdutosActionPerformed
-        if (clienteDaSessao != null) {
-            popularListaDeProdutos();
+        popularListaDeProdutos();
+        if (produtosDoBanco.size() > 0) {
             btnFinalizarCompra.setEnabled(true);
+        } else {
+            Mensagem.mostrarErro("Não existe nenhum produto cadastrado.");
         }
+        
     }//GEN-LAST:event_btnCarregarProdutosActionPerformed
-
-    private void btnValidarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarClienteActionPerformed
-        // TODO add your handling code here:
-        String clienteId = txtFieldCodCliente.getText();
-        if (Validador.isIdValido(clienteId)) {
-            clienteDaSessao = database.getSelecionarActions().selecionarClienteById(Integer.parseInt(clienteId));
-            if (clienteDaSessao == null) {
-                Mensagem.mostrarErro("ID do cliente inválido");
-                txtFieldCodCliente.setText("");
-            } else {
-                txtFieldCodCliente.setEnabled(false);
-                btnCarregarProdutos.setEnabled(true);
-            }
-        }
-    }//GEN-LAST:event_btnValidarClienteActionPerformed
 
     private void btnReiniciarTelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReiniciarTelaActionPerformed
         // TODO add your handling code here:
         resetarTela();
     }//GEN-LAST:event_btnReiniciarTelaActionPerformed
+    
+    
+    private void comboBoxClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxClientesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxClientesActionPerformed
+
+    private void btnAtualizarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarClientesActionPerformed
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+        int tamanhoAntigo = clientesDisponiveis.size();
+        clientesDisponiveis = database.getSelecionarActions().selecionarClientes();
+        popularClientesNoComboBox();
+        int tamanhoNovo = clientesDisponiveis.size();
+        int quantidadeNovosDistribuidores = tamanhoNovo - tamanhoAntigo;
+        if (quantidadeNovosDistribuidores < 0) {
+            Mensagem.mostrarSucesso(Math.abs(quantidadeNovosDistribuidores)+" foram removidos.");
+        } else if (quantidadeNovosDistribuidores > 0) {
+            Mensagem.mostrarSucesso(Math.abs(quantidadeNovosDistribuidores)+" foram adicionados.");        
+        } else {
+            Mensagem.mostrarSucesso("Nenhuma alteração.");
+        }
+        resetarTela();
+    }//GEN-LAST:event_btnAtualizarClientesActionPerformed
 
     @Override
     public void resetarTela() {
-        txtFieldCodCliente.setEnabled(true);
-        txtFieldCodCliente.setText("");
-        btnCarregarProdutos.setEnabled(false);
+        popularClientesNoComboBox();
         btnFinalizarCompra.setEnabled(false);
         paneProdutosContainer.removeAll();
         paneProdutosContainer.updateUI();
@@ -301,14 +321,14 @@ public class TelaDeCompraPanel extends javax.swing.JFrame implements ProdutosCom
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtualizarClientes;
     private javax.swing.JButton btnCarregarProdutos;
     private javax.swing.JButton btnFinalizarCompra;
     private javax.swing.JButton btnReiniciarTela;
-    private javax.swing.JButton btnValidarCliente;
+    private javax.swing.JComboBox<String> comboBoxClientes;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lbCodCliente;
     private javax.swing.JScrollPane scrollPaneProdutos;
-    private javax.swing.JTextField txtFieldCodCliente;
     // End of variables declaration//GEN-END:variables
     private javax.swing.JPanel paneProdutosContainer;
 }
