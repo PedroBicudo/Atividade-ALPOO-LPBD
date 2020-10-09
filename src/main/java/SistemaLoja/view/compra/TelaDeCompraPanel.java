@@ -274,7 +274,7 @@ public class TelaDeCompraPanel extends javax.swing.JFrame implements ProdutosCom
     
     private void popularListaDeProdutos() {
         paneProdutosContainer.removeAll();
-        produtosDoBanco = database.getSelecionarActions().selecionarProdutos();
+        produtosDoBanco = database.getSelecionarActions().selecionarProdutosNaoVencidosComEstoque();
         produtosCompradosPeloCliente = new ProdutoComprado[produtosDoBanco.size()];
 
         for (int pos=0; pos < produtosDoBanco.size(); pos++) {
