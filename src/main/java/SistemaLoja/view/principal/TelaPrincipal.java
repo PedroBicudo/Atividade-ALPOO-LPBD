@@ -9,6 +9,7 @@ import SistemaLoja.view.atualizacao.TelaDeOpcoesDeAtualizacao;
 import SistemaLoja.view.cadastro.TelaDeOpcoesDeCadastro;
 import SistemaLoja.view.compra.TelaDeCompraPanel;
 import SistemaLoja.view.extras.TelaDeExtras;
+import SistemaLoja.view.remocao.TelaDeOpcoesDeExclusao;
 import javax.swing.JFrame;
 
 /**
@@ -20,6 +21,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private TelaDeCompraPanel telaDeCompra;
     private TelaDeOpcoesDeCadastro telaDeOpcoesDeCadastro;
     private TelaDeOpcoesDeAtualizacao telaDeOpcoesDeAtualizacao;
+    private TelaDeOpcoesDeExclusao telaDeOpcoesDeExclusao;
     private TelaDeExtras telaDeExtras;
 
     /**
@@ -36,6 +38,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         telaDeOpcoesDeCadastro.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         telaDeOpcoesDeAtualizacao = new TelaDeOpcoesDeAtualizacao();
         telaDeOpcoesDeAtualizacao.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        telaDeOpcoesDeExclusao = new TelaDeOpcoesDeExclusao();
+        telaDeOpcoesDeExclusao.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
     }
     
     /**
@@ -152,6 +157,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnExcluirDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirDadosActionPerformed
         // TODO add your handling code here:
+        if (!telaDeOpcoesDeExclusao.isVisible()) {
+            telaDeOpcoesDeExclusao.setVisible(true);
+        }
     }//GEN-LAST:event_btnExcluirDadosActionPerformed
 
     /**
