@@ -9,6 +9,8 @@ import SistemaLoja.database.conexao.IBancoDao;
 import SistemaLoja.model.contato.Telefone;
 import SistemaLoja.model.contato.TelefoneCliente;
 import SistemaLoja.model.contato.TelefoneDistribuidor;
+import SistemaLoja.model.endereco.Bairro;
+import SistemaLoja.model.endereco.Cidade;
 import SistemaLoja.model.endereco.Residencia;
 import SistemaLoja.model.endereco.Rua;
 import SistemaLoja.model.pessoa_fisica.Cliente;
@@ -153,5 +155,40 @@ public class SQLServerUpdate implements AtualizarDados {
             return false;
         }        
     }
-      
+    
+    @Override
+    public boolean atualizarCidade(Cidade cidade) {
+        try {
+            String sqlUpdate = "UPDATE CIDADE SET NOME=?, IDFK_ESTADO=? WHERE ID_CIDADE=?";
+            PreparedStatement prepareStatement = database.getConnection().prepareStatement(sqlUpdate);
+            prepareStatement.setString(1, cidade.getNome());
+            prepareStatement.setInt(2, cidade.getIdfkEstado());
+            prepareStatement.setInt(3, cidade.getIdCidade());
+            prepareStatement.executeUpdate();
+            
+            return true;
+        } catch (SQLException exception) {
+            
+            return false;
+        }        
+    }
+
+    @Override
+    public boolean atualizarBairro(Bairro bairro) {
+        try {
+            String sqlUpdate = "UPDATE BAIRRO SET NOME=?, IDFK_CIDADE=? WHERE ID_BAIRRO=?";
+            PreparedStatement prepareStatement = database.getConnection().prepareStatement(sqlUpdate);
+            prepareStatement.setString(1, bairro.getNome());
+            prepareStatement.setInt(2, bairro.getIdfkCidade());
+            prepareStatement.setInt(3, bairro.getIdBairro());
+            prepareStatement.executeUpdate();
+            
+            return true;
+        } catch (SQLException exception) {
+            
+            return false;
+        }        
+    }
+    
+    
 }

@@ -21,7 +21,7 @@ public class Cliente {
     private Date dataNascimento;
     private String email; 
     private Endereco endereco;
-    private ArrayList<TelefoneCliente> telefones; 
+    private ArrayList<TelefoneCliente> telefones;
 
     public int getIdCliente() {
         return idCliente;

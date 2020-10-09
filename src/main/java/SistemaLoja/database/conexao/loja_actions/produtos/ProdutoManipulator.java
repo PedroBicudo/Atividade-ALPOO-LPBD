@@ -11,6 +11,7 @@ import SistemaLoja.model.produtos.ItemVenda;
 import SistemaLoja.model.produtos.ProdutoComprado;
 import SistemaLoja.model.produtos.Venda;
 import SistemaLoja.model.produtos.Produto;
+import SistemaLoja.utils.Mensagem;
 import java.util.ArrayList;
 
 /**
@@ -38,7 +39,9 @@ public class ProdutoManipulator implements ProdutoActions {
         for (ProdutoComprado produtoComprado: produtosComprados) {
             boolean isCompraDoProdutoEfetuada = efetuarCompraDoProduto(venda, produtoComprado);
             if (!isCompraDoProdutoEfetuada) {
-                // Mensagem de erro
+                Mensagem.mostrarErro("A compra de '"+produtoComprado.getProduto().getDescricao()+"' nao foi concluida.");
+            } else {
+                Mensagem.mostrarSucesso("A compra de '"+produtoComprado.getProduto().getDescricao()+"' foi concluida.");
             }
         }
     }
