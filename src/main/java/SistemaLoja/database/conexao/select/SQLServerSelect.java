@@ -346,7 +346,7 @@ public class SQLServerSelect implements SelecionarDados {
     public ArrayList<Produto> selecionarProdutos() {
         ArrayList<Produto> produtosEncontrados = new ArrayList<>();
         try {
-            String sqlSelect = "SELECT ID_PRODUTO, ESTOQUE, DATA_VALIDADE, DESCRICAO, PRECO_CUSTO, PRECO_VENDA, IDFK_DISTRIBUIDOR FROM PRODUTO WHERE DATA_VALIDADE > CURRENT_TIMESTAMP AND ESTOQUE > 0";
+            String sqlSelect = "SELECT ID_PRODUTO, ESTOQUE, DATA_VALIDADE, DESCRICAO, PRECO_CUSTO, PRECO_VENDA, IDFK_DISTRIBUIDOR FROM PRODUTO";
             PreparedStatement prepareStatement = database.getConnection().prepareStatement(sqlSelect);
             ResultSet produtos = prepareStatement.executeQuery();
             while (produtos.next()) {
@@ -362,6 +362,26 @@ public class SQLServerSelect implements SelecionarDados {
         return produtosEncontrados;        
     }
 
+    @Override
+    public ArrayList<Produto> selecionarProdutosNaoVencidosComEstoque() {
+        ArrayList<Produto> produtosEncontrados = new ArrayList<>();
+        try {
+            String sqlSelect = "SELECT ID_PRODUTO, ESTOQUE, DATA_VALIDADE, DESCRICAO, PRECO_CUSTO, PRECO_VENDA, IDFK_DISTRIBUIDOR FROM PRODUTO WHERE DATA_VALIDADE > CURRENT_TIMESTAMP AND ESTOQUE > 0";
+            PreparedStatement prepareStatement = database.getConnection().prepareStatement(sqlSelect);
+            ResultSet produtos = prepareStatement.executeQuery();
+            while (produtos.next()) {
+                produtosEncontrados.add(
+                        new Produto(produtos.getInt("ID_PRODUTO"), produtos.getInt("IDFK_DISTRIBUIDOR"), produtos.getInt("ESTOQUE"), produtos.getDate("DATA_VALIDADE"), produtos.getString("DESCRICAO"), produtos.getFloat("PRECO_CUSTO"), produtos.getFloat("PRECO_VENDA"))
+                );
+            }
+            
+        } catch (SQLException exception) {
+            System.out.println(exception.getMessage());
+        }        
+        
+        return produtosEncontrados;        
+    }
+    
     @Override
     public ArrayList<TelefoneCliente> selecionarTelefonesByClienteId(int clienteId) {
         ArrayList<TelefoneCliente> telefonesDoCliente = new ArrayList<>();
